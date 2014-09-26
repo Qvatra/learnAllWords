@@ -1,0 +1,13 @@
+{
+  "name": "bowerCardsInit",
+  "version": "0.0.0",
+  "authors": [
+    "qvatra <mail2zin@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.2.25",
+    "ionic": "~0.9.27"
+  }
+}
