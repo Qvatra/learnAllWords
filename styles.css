@@ -2,6 +2,10 @@
     margin-top: 44px;
 }
 
+.hasFooter {
+    margin-bottom: 44px;
+}
+
 .red {
     background-color: red;
 }
@@ -12,4 +16,40 @@
 
 .blue {
     background-color: blue;
+}
+
+.MyContainerDiv {
+    width: 100%;
+    padding: 0;
+    display: table;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.MyCenterDiv {
+    padding: 0;
+    vertical-align: middle;
+    display: table-cell;
+    margin: 0;
+    background-color: rgb(47, 79, 79);
+}
+
+.cardHeight {
+    height: 132px;
+}
+
+.MyBtn {
+    max-width: 80%;
+    margin: auto;
+}
+
+.floatR {
+    float: right;
+}
+
+.floatL {
+    float: left;
 }

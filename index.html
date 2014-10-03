@@ -11,49 +11,98 @@
     <script src="bower_components/ionic/release/js/ionic.min.js"></script>
 
     <link href="styles.css" rel="stylesheet" />
-    <script src="mainController.js"></script>
+    <script src="dutch.js"></script>
+
+    <script src="app.js"></script>
+    <script src="services/settingsService.js"></script>
+    <script src="services/ioService.js"></script>
+    <script src="services/cardService.js"></script>
+
+    <script src="controllers/mainController.js"></script>
 </head>
 
 <body ng-controller="mainController">
+
     <div class="bar bar-header bar-light">
         <div class="h1 title">Word Trainer</div>
         <button class="button button-icon icon ion-navicon"></button>
     </div>
 
-    <div class="hasHeader">
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="hasHeader MyContainerDiv">
+        <!--------------------------------------------------------------------------------------------------------------------------------------------------->
 
-
-        <div ng-show="mode === 'home'">
-            HOME:<br />
-            info<br />
-            statistic<br />
-            <button ng-click="card()" class="button button-balanced">Start</button>
+        <div ng-show="mode === 'home'" class="MyCenterDiv">
+            <div class="row">
+                HOME: <i class="ion-android-star"></i>
+            </div>
+            <div class="row">
+                <div class="col-50 col-offset-25">
+                    <button ng-click="card(); getNextItem();" class="button button-balanced button-large button-full MyBtn">Start</button>
+                </div>
+            </div>
         </div>
 
 
 
-        <div ng-show="mode === 'card'">
+        <div ng-show="mode === 'card'" class="MyCenterDiv">
             <div class="row">
                 <div class="col-50 col-offset-25 green">
                     <div class="card">
                         <div class="item item-text-wrap">
-                            {{word}}
+                            <div class="floatL">
+                                {{current.w}}
+                            </div>
+                            <div class="floatR">
+                                <div ng-show="current.weight == 1">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="current.weight == 2">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="current.weight == 3">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="current.weight == 4">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div><br />
-            <button ng-click="rate()" class="button button-balanced">Translation</button>
-
+            <div class="row cardHeight MyBtn"></div>
+            <div class="row">
+                <div class="col-50 col-offset-25">
+                    <button ng-click="rate()" class="button button-balanced button-large button-full MyBtn">Show translation</button>
+                </div>
+            </div>
         </div>
 
 
 
-        <div ng-show="mode === 'rate'">
+        <div ng-show="mode === 'rate'" class="MyCenterDiv">
             <div class="row">
                 <div class="col-50 col-offset-25 green">
                     <div class="card">
                         <div class="item item-text-wrap">
-                            {{word}}
+                            <div class="floatL">
+                                {{current.w}}
+                            </div>
+                            <div class="floatR">
+                                <div ng-show="current.weight == 1">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="current.weight == 2">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="current.weight == 3">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="current.weight == 4">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,30 +111,50 @@
                 <div class="col-50 col-offset-25 blue">
                     <div class="card">
                         <div class="item item-text-wrap">
-                            {{translate}}
+                            {{current.t}}
                         </div>
                     </div>
                 </div>
             </div><br />
             <div class="row">
                 <div class="col-33 col-offset-10">
-                    <button ng-click="card()" class="button button-assertive button-large button-full">Wrong</button>
+                    <button ng-click="wrong(); card(); getNextItem();" class="button button-assertive button-large button-full MyBtn">Wrong</button>
                 </div>
                 <div class="col-33 col-offset-10">
-                    <button ng-click="card()" class="button button-balanced button-large button-full">Correct</button>
+                    <button ng-click="correct(); card(); getNextItem();" class="button button-balanced button-large button-full MyBtn">Correct</button>
                 </div>
             </div>
         </div>
 
 
 
-        <div ng-show="mode === 'settings'">
-            SETTINGS:
+        <div ng-show="mode === 'settings'" ng-click="settingsClick()" class="MyCenterDiv">
+            <h3>Learning order:</h3>
+            <ul class="list">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="radio" name="group" ng-model="settingsDirection" value="direct">
+                    </label>
+                    <strong>Word <i class="ion-arrow-right-c"></i> Translation</strong>
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="radio" name="group" ng-model="settingsDirection" value="reverse">
+                    </label>
+                    <strong>Translation <i class="ion-arrow-right-c"></i> Word</strong>
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="radio" name="group" ng-model="settingsDirection" value="both">
+                    </label>
+                    <strong>Word <i class="ion-arrow-right-c"></i> Translation</strong> and <strong>Translation <i class="ion-arrow-right-c"></i> Word</strong>
+                </li>
+            </ul>
         </div>
 
-
-    </div>
-
+        <!--------------------------------------------------------------------------------------------------------------------------------------------------->
+    </div>  <!----------------------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
     <div class="tabs tabs-icon-only">
