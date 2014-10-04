@@ -53,3 +53,27 @@
 .floatL {
     float: left;
 }
+
+.inputLabel {
+    min-width: 160px;
+    max-width: 160px;
+}
+
+.inputWidth {
+    max-width: 35px;
+}
+
+.centerTxt {
+    text-align: center;
+    color: rgb(169, 169, 169);
+    font-family: cursive;
+}
+
+.progressBar {
+    height: 10px;
+    margin-bottom: 10px;
+}
+
+.noMargin {
+    margin: 0px;
+}

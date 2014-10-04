@@ -34,7 +34,7 @@
 
         <div ng-show="mode === 'home'" class="MyCenterDiv">
             <div class="row">
-                HOME: <i class="ion-android-star"></i>
+                <i class="ion-android-star"></i>
             </div>
             <div class="row">
                 <div class="col-50 col-offset-25">
@@ -45,43 +45,17 @@
 
 
 
-        <div ng-show="mode === 'card'" class="MyCenterDiv">
-            <div class="row">
-                <div class="col-50 col-offset-25 green">
-                    <div class="card">
-                        <div class="item item-text-wrap">
-                            <div class="floatL">
-                                {{current.w}}
-                            </div>
-                            <div class="floatR">
-                                <div ng-show="current.weight == 1">
-                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
-                                </div>
-                                <div ng-show="current.weight == 2">
-                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
-                                </div>
-                                <div ng-show="current.weight == 3">
-                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i>
-                                </div>
-                                <div ng-show="current.weight == 4">
-                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><br />
-            <div class="row cardHeight MyBtn"></div>
+
+
+        <div ng-show="mode === 'rate' || mode == 'card'" class="MyCenterDiv">
             <div class="row">
                 <div class="col-50 col-offset-25">
-                    <button ng-click="rate()" class="button button-balanced button-large button-full MyBtn">Show translation</button>
+                    <div class="centerTxt">
+                        <h1 class="noMargin" ng-style="colorStyle">Progress: {{progress.toPrecision(3)}}&nbsp;%</h1>
+                    </div>
+                    <div class="progressBar" ng-style="progressBarStyle"></div>
                 </div>
             </div>
-        </div>
-
-
-
-        <div ng-show="mode === 'rate'" class="MyCenterDiv">
             <div class="row">
                 <div class="col-50 col-offset-25 green">
                     <div class="card">
@@ -107,49 +81,93 @@
                     </div>
                 </div>
             </div><br />
-            <div class="row">
-                <div class="col-50 col-offset-25 blue">
-                    <div class="card">
-                        <div class="item item-text-wrap">
-                            {{current.t}}
-                        </div>
+
+
+            <div ng-show="mode === 'card'">
+                <div class="row cardHeight MyBtn"></div>
+                <div class="row">
+                    <div class="col-50 col-offset-25">
+                        <button ng-click="rate()" class="button button-balanced button-large button-full MyBtn">Show translation</button>
                     </div>
                 </div>
-            </div><br />
-            <div class="row">
-                <div class="col-33 col-offset-10">
-                    <button ng-click="wrong(); card(); getNextItem();" class="button button-assertive button-large button-full MyBtn">Wrong</button>
-                </div>
-                <div class="col-33 col-offset-10">
-                    <button ng-click="correct(); card(); getNextItem();" class="button button-balanced button-large button-full MyBtn">Correct</button>
+            </div>
+
+
+            <div ng-show="mode === 'rate'">
+                <div class="row">
+                    <div class="col-50 col-offset-25 blue">
+                        <div class="card">
+                            <div class="item item-text-wrap">
+                                {{current.t}}
+                            </div>
+                        </div>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-33 col-offset-10">
+                        <button ng-click="wrong(); card(); getNextItem();" class="button button-assertive button-large button-full MyBtn">Wrong</button>
+                    </div>
+                    <div class="col-33 col-offset-10">
+                        <button ng-click="correct(); card(); getNextItem();" class="button button-balanced button-large button-full MyBtn">Correct</button>
+                    </div>
                 </div>
             </div>
+
         </div>
 
 
 
-        <div ng-show="mode === 'settings'" ng-click="settingsClick()" class="MyCenterDiv">
+
+
+
+
+
+        <div ng-show="mode === 'settings'" class="MyCenterDiv">
             <h3>Learning order:</h3>
             <ul class="list">
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="radio" name="group" ng-model="settingsDirection" value="direct">
+                        <input type="radio" name="group" ng-model="settingsDirection" value="direct" ng-click="directionClick('direct')">
                     </label>
                     <strong>Word <i class="ion-arrow-right-c"></i> Translation</strong>
                 </li>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="radio" name="group" ng-model="settingsDirection" value="reverse">
+                        <input type="radio" name="group" ng-model="settingsDirection" value="reverse" ng-click="directionClick('reverse')">
                     </label>
                     <strong>Translation <i class="ion-arrow-right-c"></i> Word</strong>
                 </li>
                 <li class="item item-checkbox">
                     <label class="checkbox">
-                        <input type="radio" name="group" ng-model="settingsDirection" value="both">
+                        <input type="radio" name="group" ng-model="settingsDirection" value="both" ng-click="directionClick('both')">
                     </label>
                     <strong>Word <i class="ion-arrow-right-c"></i> Translation</strong> and <strong>Translation <i class="ion-arrow-right-c"></i> Word</strong>
                 </li>
             </ul>
+
+            <h3>Card frequency:</h3>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>&nbsp; card weight:</span>
+                    <input class="inputWidth" type="number" name="input" ng-model="w1" min="0" max="99" required>
+                    <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w1p.toPrecision(3)}}&nbsp;%</span>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i>&nbsp; card weight:</span>
+                    <input class="inputWidth" type="number" name="input" ng-model="w2" min="0" max="99" required>
+                    <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w2p.toPrecision(3)}}&nbsp;%</span>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>&nbsp; card weight:</span>
+                    <input class="inputWidth" type="number" name="input" ng-model="w3" min="0" max="99" required>
+                    <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w3p.toPrecision(3)}}&nbsp;%</span>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>&nbsp; card weight:</span>
+                    <input class="inputWidth" type="number" name="input" ng-model="w4" min="0" max="99" required>
+                    <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w4p.toPrecision(3)}}&nbsp;%</span>
+                </label>
+            </div>
         </div>
 
         <!--------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -164,7 +182,7 @@
         <a class="tab-item" ng-click="card()">
             <i class="icon ion-star"></i>
         </a>
-        <a class="tab-item" ng-click="settings()">
+        <a class="tab-item" ng-click="settingsView()">
             <i class="icon ion-gear-a"></i>
         </a>
     </div>

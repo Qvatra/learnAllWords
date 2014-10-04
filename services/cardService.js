@@ -1,13 +1,9 @@
 ﻿angular.module('app').service('cardService', ['$q', 'ioService', '$rootScope', function ($q, io, $rootScope) {
     console.log('card');
+    console.log($rootScope.settings.direction);
     var vm = this;
 
     vm.array = [];
-    vm.w1 = 5;
-    vm.w2 = 15;
-    vm.w3 = 30;
-    vm.w4 = 50; //don't really use it
-
     
     vm.initialize = function () {
         io.parseDictionary('/dutch.js').then(function (result) {
@@ -15,6 +11,39 @@
             console.log('loading array --------------------------------');
             console.log(result);
         });
+    }
+
+
+
+    vm.calculateProgress = function () {
+        var progress = 0;
+
+        if ($rootScope.settings.direction == 'direct') {
+            vm.array.forEach(function (item) {
+                progress += parseInt(item.d);
+            });
+            progress = progress / vm.array.length;
+        } else if ($rootScope.settings.direction == 'reverse') {
+            vm.array.forEach(function (item) {
+                progress += parseInt(item.r);
+            });
+            progress = progress / vm.array.length;
+        } else if ($rootScope.settings.direction == 'both') {
+            vm.array.forEach(function (item) {
+                progress += (parseInt(item.d) + parseInt(item.r));
+            });
+            progress = progress / (2 * vm.array.length);
+        }
+
+        console.log((progress - 1) * 100 / 3);
+        return (progress - 1) * 100 / 3;
+    }
+
+
+    vm.calculateColor = function () {
+        var delta = vm.calculateProgress() * 5.1;
+        if (delta <= 255) return 'rgb(255,' + Math.floor(delta) + ',0)';
+        else return 'rgb('+ Math.floor(510 - delta) + ',255,0)';
     }
 
 
@@ -29,20 +58,21 @@
 
 
     vm.nextCard = function () {
-        var r = Math.random() * 100; //[0,100)
+        var r = Math.random() * ($rootScope.settings.w1 + $rootScope.settings.w2 + $rootScope.settings.w3 + $rootScope.settings.w4);
         var w;
 
-        if (r <= vm.w1) w = 4;
-        else if (r <= vm.w1 + vm.w2) w = 3;
-        else if (r <= vm.w1 + vm.w2 + vm.w3) w = 2;
+        if (r <= $rootScope.settings.w1) w = 4;
+        else if (r <= $rootScope.settings.w1 + $rootScope.settings.w2) w = 3;
+        else if (r <= $rootScope.settings.w1 + $rootScope.settings.w2 + $rootScope.settings.w3) w = 2;
         else w = 1;
 
+        console.log('r='+r+' w='+w);
 
-        if ($rootScope.direction == 'direct') {
+        if ($rootScope.settings.direction == 'direct') {
             var item = vm.getDirect(w);
-        } else if ($rootScope.direction == 'reverse') {
+        } else if ($rootScope.settings.direction == 'reverse') {
             var item = vm.getReverse(w);
-        } else if ($rootScope.direction == 'both') {
+        } else if ($rootScope.settings.direction == 'both') {
             var item = (Math.random() > 0.5) ? vm.getDirect(w) : vm.getReverse(w);
         }
 
