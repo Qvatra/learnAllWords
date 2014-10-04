@@ -22,20 +22,20 @@
     }
 
 
-    vm.calculateProgress = function () {
+    vm.calculateProgress = function (dir) {
         var progress = 0;
 
-        if ($rootScope.settings.direction == 'direct') {
+        if (dir == 'direct') {
             vm.array.forEach(function (item) {
                 progress += parseInt(item.d);
             });
             progress = progress / vm.array.length;
-        } else if ($rootScope.settings.direction == 'reverse') {
+        } else if (dir == 'reverse') {
             vm.array.forEach(function (item) {
                 progress += parseInt(item.r);
             });
             progress = progress / vm.array.length;
-        } else if ($rootScope.settings.direction == 'both') {
+        } else if (dir == 'both') {
             vm.array.forEach(function (item) {
                 progress += (parseInt(item.d) + parseInt(item.r));
             });
@@ -47,8 +47,9 @@
     }
 
 
-    vm.calculateColor = function () {
-        var delta = vm.calculateProgress() * 5.1;
+
+    vm.calculateColor = function (dir) {
+        var delta = vm.calculateProgress(dir) * 5.1;
         if (delta <= 255) return 'rgb(255,' + Math.floor(delta) + ',0)';
         else return 'rgb('+ Math.floor(510 - delta) + ',255,0)';
     }

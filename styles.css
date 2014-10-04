@@ -84,3 +84,8 @@
     margin: 0px 0px 1px 10px !important;
     max-width: 35px;
 }
+
+.cursive {
+    font-family: cursive;
+    color: rgb(169, 169, 169);
+}

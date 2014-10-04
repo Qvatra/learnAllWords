@@ -10,6 +10,12 @@
     vm.current = null; //card to process
 
     vm.progress = 0; //total %
+    vm.progressDir = 0;
+    vm.progressRev = 0;
+    vm.progressBoth = 0;
+    vm.dirColorStyle;
+    vm.revColorStyle;
+    vm.bothColorStyle;
     vm.colorStyle; //color of the progress msg 
     vm.progressBarStyle; //color and width of the progress bar
 
@@ -22,25 +28,30 @@
         vm.w4 = parseFloat(settings.w4);
     }
 
+
     vm.getSettings(settingsService.initialize());
-
-
-
     cardService.initialize();
-
 
     vm.home = function () {
         //console.log('home');
         vm.mode = 'home';
-        vm.progress = cardService.calculateProgress();
+        vm.progress = cardService.calculateProgress($rootScope.settings.direction);
+        vm.progressDir = cardService.calculateProgress('direct');
+        vm.progressRev = cardService.calculateProgress('reverse');
+        vm.progressBoth = cardService.calculateProgress('both');
+        vm.dirColorStyle = { color: cardService.calculateColor('direct'), fontFamily: 'cursive' };
+        vm.revColorStyle = { color: cardService.calculateColor('reverse'), fontFamily: 'cursive' };
+        vm.bothColorStyle = { color: cardService.calculateColor('both'), fontFamily: 'cursive' };
     };
+
+
 
     vm.card = function () {
         //console.log('card');
         vm.mode = 'card';
-        vm.progress = cardService.calculateProgress();
-        vm.colorStyle = { color: cardService.calculateColor() };
-        vm.progressBarStyle = { background: cardService.calculateColor(), width: vm.progress + '%' }
+        vm.progress = cardService.calculateProgress($rootScope.settings.direction);
+        vm.colorStyle = { color: cardService.calculateColor($rootScope.settings.direction) };
+        vm.progressBarStyle = { background: cardService.calculateColor($rootScope.settings.direction), width: vm.progress + '%' }
     };
 
     vm.rate = function () {
