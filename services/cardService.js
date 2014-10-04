@@ -14,6 +14,13 @@
     }
 
 
+    vm.resetProgress = function () {
+        vm.array.forEach(function (item) {
+            item.r = 1;
+            item.d = 1;
+        });
+    }
+
 
     vm.calculateProgress = function () {
         var progress = 0;

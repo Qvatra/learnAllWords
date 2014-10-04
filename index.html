@@ -119,9 +119,6 @@
 
 
 
-
-
-
         <div ng-show="mode === 'settings'" class="MyCenterDiv">
             <h3>Learning order:</h3>
             <ul class="list">
@@ -145,7 +142,7 @@
                 </li>
             </ul>
 
-            <h3>Card frequency:</h3>
+            <h3>Card frequency:&nbsp;&nbsp;<button class="button button-assertive button-small" ng-click="resetWeights()">Default</button></h3>
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>&nbsp; card weight:</span>
@@ -168,6 +165,10 @@
                     <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w4p.toPrecision(3)}}&nbsp;%</span>
                 </label>
             </div>
+
+            <h3>Progress: {{progress.toPrecision(3)}}&nbsp;%</h3>
+            <button class="button button-assertive button-small" ng-click="resetProgress();">Reset your progress</button>
+            
         </div>
 
         <!--------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -180,7 +181,7 @@
             <i class="icon ion-home"></i>
         </a>
         <a class="tab-item" ng-click="card()">
-            <i class="icon ion-star"></i>
+            <i class="ion-android-book bookIcon"></i>
         </a>
         <a class="tab-item" ng-click="settingsView()">
             <i class="icon ion-gear-a"></i>

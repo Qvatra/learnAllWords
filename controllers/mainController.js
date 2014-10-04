@@ -13,13 +13,17 @@
     vm.progressBarStyle;
 
 
-    var settings = settingsService.initialize();
-    vm.settingsDirection = settings.direction;
-    vm.w1 = parseFloat(settings.w1);
-    vm.w2 = parseFloat(settings.w2);
-    vm.w3 = parseFloat(settings.w3);
-    vm.w4 = parseFloat(settings.w4);
-    console.log(vm.w4);
+    vm.getSettings = function (settings) {
+        vm.settingsDirection = settings.direction;
+        vm.w1 = parseFloat(settings.w1);
+        vm.w2 = parseFloat(settings.w2);
+        vm.w3 = parseFloat(settings.w3);
+        vm.w4 = parseFloat(settings.w4);
+    }
+
+    vm.getSettings(settingsService.initialize());
+
+
 
     cardService.initialize();
 
@@ -96,12 +100,10 @@
     };
 
 
-
     vm.wrong = function () {
         cardService.wrong(vm.current.dir);
         vm.current = null;
     }
-
 
 
     vm.correct = function () {
@@ -110,8 +112,19 @@
     }
 
 
-
     vm.directionClick = function (val) {
         settingsService.detectDirection(val);
     }
+
+
+    vm.resetProgress = function () {
+        cardService.resetProgress();
+        vm.progress = 0;
+    }
+
+
+    vm.resetWeights = function () {
+        vm.getSettings(settingsService.resetWeights());
+    }
+
 }]);

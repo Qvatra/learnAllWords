@@ -17,6 +17,18 @@
 
 
 
+    vm.resetWeights = function () {
+        $rootScope.settings.w1 = 5;
+        $rootScope.settings.w2 = 15;
+        $rootScope.settings.w3 = 30;
+        $rootScope.settings.w4 = 50;
+        vm.save();
+
+        return $rootScope.settings;
+    }
+
+
+
     vm.detectDirection = function (val) {
         $rootScope.settings.direction = val;
         console.log('direction changed to ' + val);
