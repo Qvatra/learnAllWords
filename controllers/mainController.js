@@ -8,9 +8,10 @@
     vm.w1p, vm.w2p, vm.w3p, vm.w4p;
     vm.mode = 'home';
     vm.current = null; //card to process
-    vm.progress;
-    vm.colorStyle;
-    vm.progressBarStyle;
+
+    vm.progress = 0; //total %
+    vm.colorStyle; //color of the progress msg 
+    vm.progressBarStyle; //color and width of the progress bar
 
 
     vm.getSettings = function (settings) {

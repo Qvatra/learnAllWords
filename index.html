@@ -34,7 +34,11 @@
 
         <div ng-show="mode === 'home'" class="MyCenterDiv">
             <div class="row">
-                <i class="ion-android-star"></i>
+                <div class="col-50 col-offset-25">
+                    <div class="centerTxt">
+                        Learning words was never easier:
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-50 col-offset-25">
@@ -145,30 +149,34 @@
             <h3>Card frequency:&nbsp;&nbsp;<button class="button button-assertive button-small" ng-click="resetWeights()">Default</button></h3>
             <div class="list">
                 <label class="item item-input">
-                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>&nbsp; card weight:</span>
-                    <input class="inputWidth" type="number" name="input" ng-model="w1" min="0" max="99" required>
+                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i></span>
+                    <strong>&nbsp; card weight:</strong>
+                    <input class="inputSettings" type="number" name="input" ng-model="w1" min="0" max="99" required>
                     <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w1p.toPrecision(3)}}&nbsp;%</span>
                 </label>
                 <label class="item item-input">
-                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i>&nbsp; card weight:</span>
-                    <input class="inputWidth" type="number" name="input" ng-model="w2" min="0" max="99" required>
+                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i></span>
+                    <strong>&nbsp; card weight:</strong>
+                    <input class="inputSettings" type="number" name="input" ng-model="w2" min="0" max="99" required>
                     <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w2p.toPrecision(3)}}&nbsp;%</span>
                 </label>
                 <label class="item item-input">
-                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>&nbsp; card weight:</span>
-                    <input class="inputWidth" type="number" name="input" ng-model="w3" min="0" max="99" required>
+                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i></span>
+                    <strong>&nbsp; card weight:</strong>
+                    <input class="inputSettings" type="number" name="input" ng-model="w3" min="0" max="99" required>
                     <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w3p.toPrecision(3)}}&nbsp;%</span>
                 </label>
                 <label class="item item-input">
-                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>&nbsp; card weight:</span>
-                    <input class="inputWidth" type="number" name="input" ng-model="w4" min="0" max="99" required>
+                    <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i></span>
+                    <strong>&nbsp; card weight:</strong>
+                    <input class="inputSettings" type="number" name="input" ng-model="w4" min="0" max="99" required>
                     <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{w4p.toPrecision(3)}}&nbsp;%</span>
                 </label>
             </div>
 
             <h3>Progress: {{progress.toPrecision(3)}}&nbsp;%</h3>
             <button class="button button-assertive button-small" ng-click="resetProgress();">Reset your progress</button>
-            
+
         </div>
 
         <!--------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -180,7 +188,7 @@
         <a class="tab-item" ng-click="home()">
             <i class="icon ion-home"></i>
         </a>
-        <a class="tab-item" ng-click="card()">
+        <a class="tab-item" ng-click="card(); getNextItem();">
             <i class="ion-android-book bookIcon"></i>
         </a>
         <a class="tab-item" ng-click="settingsView()">

@@ -55,13 +55,10 @@
 }
 
 .inputLabel {
-    min-width: 160px;
-    max-width: 160px;
+    max-width: 55px;
 }
 
-.inputWidth {
-    max-width: 35px;
-}
+
 
 .centerTxt {
     text-align: center;
@@ -81,4 +78,9 @@
 .bookIcon {
     font-size: 24px !important;
     margin-top: 13px !important;
+}
+
+.inputSettings {
+    margin: 0px 0px 1px 10px !important;
+    max-width: 35px;
 }
