@@ -1,4 +1,4 @@
-﻿Wat; Что
-Wie; Кто
-Ik; Йа
-het boek; Книжко
+﻿Wat; Что?
+Wie; Кто?
+Ik; Йа?
+het boek; Книжко?

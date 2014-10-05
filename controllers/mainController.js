@@ -3,6 +3,9 @@
     console.log($rootScope.settings.direction);
     var vm = $scope;
 
+    vm.cardService = cardService;
+    vm.ioService = io;
+
     vm.settingsDirection;
     vm.w1, vm.w2, vm.w3, vm.w4;
     vm.w1p, vm.w2p, vm.w3p, vm.w4p;
@@ -57,6 +60,10 @@
     vm.rate = function () {
         //console.log('rate');
         vm.mode = 'rate';
+    };
+
+    vm.edit = function () {
+        vm.mode = 'edit';
     };
 
     vm.settingsView = function () {
@@ -138,5 +145,15 @@
     vm.resetWeights = function () {
         vm.getSettings(settingsService.resetWeights());
     }
+
+    vm.loadSourceFile = function () {
+        cardService.loadSourceFile().then(function () {
+            vm.progress = 0;
+            vm.progressDir = 0;
+            vm.progressRev = 0;
+            vm.progressBoth = 0;
+        });
+    }
+
 
 }]);

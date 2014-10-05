@@ -4,17 +4,15 @@
     var vm = this;
 
     vm.array = [];
-    
-    //vm.initialize = function () {
-    //    io.parseDictionary('/dutch.js').then(function (result) {
-    //        vm.array = result;
-    //        console.log('loading array --------------------------------');
-    //        console.log(result);
-    //    });
-    //}
 
     vm.array = io.loadDictionary();
 
+    vm.loadSourceFile = function () {
+        return io.parseDictionary('/dutch.js').then(function (result) {
+            vm.array = result;
+
+        });
+    }
 
     vm.resetProgress = function () {
         vm.array.forEach(function (item) {
@@ -54,7 +52,7 @@
     vm.calculateColor = function (dir) {
         var delta = vm.calculateProgress(dir) * 5.1;
         if (delta <= 255) return 'rgb(255,' + Math.floor(delta) + ',0)';
-        else return 'rgb('+ Math.floor(510 - delta) + ',255,0)';
+        else return 'rgb(' + Math.floor(510 - delta) + ',255,0)';
     }
 
 
@@ -77,7 +75,7 @@
         else if (r <= $rootScope.settings.w1 + $rootScope.settings.w2 + $rootScope.settings.w3) w = 2;
         else w = 1;
 
-        console.log('r='+r+' w='+w);
+        console.log('r=' + r + ' w=' + w);
 
         if ($rootScope.settings.direction == 'direct') {
             var item = vm.getDirect(w);
@@ -132,9 +130,9 @@
 
 
     vm.correct = function (dir) {
-        if (dir == 'd'){
+        if (dir == 'd') {
             if (vm.array[vm.array.length - 1].d < 4) vm.array[vm.array.length - 1].d++;
-        } else if (dir == 'r'){
+        } else if (dir == 'r') {
             if (vm.array[vm.array.length - 1].r < 4) vm.array[vm.array.length - 1].r++;
         }
         io.saveDictionary(vm.array);
@@ -151,6 +149,17 @@
         io.saveDictionary(vm.array);
     }
 
+    vm.deleteItem = function (idx) {
+        vm.array.splice(idx, 1);
+    }
+
+    vm.deleteAll = function () {
+        vm.array = [];
+    }
+
+    vm.addItem = function () {
+        vm.array.push({ w: '', t: '', d: 1, r: 1 });
+    }
 
 
 }]);

@@ -11,6 +11,7 @@
                 var array = pairs.map(function (item) {
                     return { w: item.split(';')[0].trim(), t: item.split(';')[1].trim(), d: 1, r: 1};
                 });
+                vm.saveDictionary(array);
                 deferred.resolve(array);
             }).error(function (data, status, headers, config) {
                 console.log('ioService: read failed');
