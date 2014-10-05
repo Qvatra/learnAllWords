@@ -2,8 +2,16 @@
     margin-top: 44px;
 }
 
+.hasHeader2 {
+    margin-top: 98px;
+}
+
 .hasFooter {
-    margin-bottom: 44px;
+    margin-bottom: 48px;
+}
+
+.hasFooter2 {
+    margin-bottom: 101px;
 }
 
 .red {
@@ -16,6 +24,10 @@
 
 .blue {
     background-color: blue;
+}
+
+.grey {
+    background-color: rgb(47, 79, 79);
 }
 
 .MyContainerDiv {
@@ -75,6 +87,10 @@
     margin: 0px;
 }
 
+.noBorder {
+    border: none;
+}
+
 .bookIcon {
     font-size: 24px !important;
     margin-top: 13px !important;
@@ -91,8 +107,17 @@
 }
 
 .myItem {
-    margin: 5px 15px 5px 15px;
+    margin: 5px 30px 7px 30px;
     padding: 0px;
+}
+
+.myItem2 {
+    margin: 5px 60px 5px 30px;
+    padding: 0px;
+}
+
+.myItem3 {
+    margin: 0px 30px 0px 30px;
 }
 
 .editInput {
@@ -137,4 +162,11 @@
     text-align: center;
     font-size: 20px;
     margin-top: 17px;
+}
+
+.scroll-bar-indicator {
+    border-radius: 50px;
+    background: rgb(6, 50, 250);
+    margin-left: -50px;
+    width: 50px !important;
 }

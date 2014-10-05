@@ -1,10 +1,9 @@
-﻿angular.module('app').controller('mainController', ['$scope', 'settingsService', 'ioService', 'cardService', '$rootScope', function ($scope, settingsService, io, cardService, $rootScope) {
-    console.log('main');
-    console.log($rootScope.settings.direction);
+﻿angular.module('app').controller('mainController', ['$scope', 'settingsService', 'ioService', 'cardService', '$rootScope', '$ionicScrollDelegate', function ($scope, settingsService, io, cardService, $rootScope, $ionicScrollDelegate) {
     var vm = $scope;
 
     vm.cardService = cardService;
     vm.ioService = io;
+    vm.scroller = $ionicScrollDelegate;
 
     vm.settingsDirection;
     vm.w1, vm.w2, vm.w3, vm.w4;

@@ -5,10 +5,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>Word trainer</title>
 
-    <script src="bower_components/angular/angular.min.js"></script>
-
     <link href="bower_components/ionic/release/css/ionic.min.css" rel="stylesheet" />
-    <script src="bower_components/ionic/release/js/ionic.min.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.bundle.js"></script>
+
+    <script src="bower_components/angular/angular.min.js"></script>
 
     <link href="styles.css" rel="stylesheet" />
     <script src="dutch.js"></script>
@@ -21,16 +21,19 @@
     <script src="controllers/mainController.js"></script>
 </head>
 
-<body ng-controller="mainController">
-
+<body ng-controller="mainController" class="grey">
     <div class="bar bar-header bar-light">
         <div class="h1 title">Word Trainer</div>
         <button class="button button-icon icon ion-navicon"></button>
     </div>
 
-    <!------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <ion-content class="hasHeader MyContainerDiv">
-        <!--------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+    <div class="hasHeader MyContainerDiv">
+
+
+
 
         <div ng-show="mode === 'home'" class="MyCenterDiv">
             <div class="row">
@@ -135,40 +138,33 @@
 
 
 
-        <div ng-show="mode === 'edit'" class="MyCenterDiv">
-            <div class="row">
-                <div class="col">
+        <div ng-show="mode === 'edit'" class="hasHeader grey">
+            <div class="item item-button-right editItem myItem2 gradientR">
+                <div class="itemText">Add new item</div>
+                <button class="button button-balanced" ng-click="cardService.addItem(); scroller.scrollBottom()"><i class="ion-plus-round"></i></button>
+            </div>
 
-                    <div class="item item-button-right editItem myItem gradientL">
-                        <div class="itemText">Delete all items</div>
-                        <button class="button button-assertive" ng-click="cardService.deleteAll()"><i class="ion-close-round"></i></button>
-                    </div>
-
-                    <div ng-repeat="item in cardService.array track by $index" class="myItem">
-                        <div class="list card noSpace">
-                            <div class="item item-button-right editItem">
-                                <input type="text" class="item-input editInput" ng-model="item.w" placeholder="Word" />
-                                <input type="text" class="item-input editInput" ng-model="item.t" placeholder="Translation" />
-                                <button class="button button-assertive" ng-click="cardService.deleteItem($index)">
-                                    <i class="ion-minus-round"></i>
-                                </button>
-                            </div>
+            <ion-content delegate-handle="scroll" class="hasHeader2 grey hasFooter2" scrollbar-y="true">
+                <div ng-repeat="item in cardService.array track by $index" class="myItem2">
+                    <div class="list card noSpace">
+                        <div class="item item-button-right editItem">
+                            <input type="text" class="item-input editInput" ng-model="item.w" placeholder="Word" disabled />
+                            <input type="text" class="item-input editInput" ng-model="item.t" placeholder="Translation" />
+                            <button class="button button-assertive" ng-click="cardService.deleteItem($index)">
+                                <i class="ion-minus-round"></i>
+                            </button>
                         </div>
                     </div>
-
-                    <div class="item item-button-right editItem myItem gradientR">
-                        <div class="itemText">Add new item</div>
-                        <button class="button button-balanced" ng-click="cardService.addItem()"><i class="ion-plus-round"></i></button>
-                    </div>
-
                 </div>
+            </ion-content>
+
+
+            <div class="tabs hasFooter grey noBorder floatL">
+                <button class="button button-balanced button-small confirmWidth" ng-click="ioService.saveDictionary(cardService.array)">Save</button>
+                <button class="button button-stable button-small confirmWidth" ng-click="ioService.loadDictionary(); home();">Cancel</button>
+                <button class="button button-assertive button-small confirmWidth" ng-click="cardService.deleteAll()">Delete all</button>
             </div>
-            <div class="row">
-                <div class="col">
-                    <button class="button button-balanced confirmWidth floatR myItem" ng-click="ioService.saveDictionary(cardService.array)">Save</button>
-                    <button class="button button-stable confirmWidth floatR myItem" ng-click="ioService.loadDictionary(); home();">Cancel</button>
-                </div>
-            </div>
+
         </div>
 
 
@@ -178,9 +174,9 @@
 
         <div ng-show="mode === 'settings'" class="MyCenterDiv">
             <h3 class="myItem">Load source file:&nbsp;&nbsp;<button class="button button-balanced button-small floatR btnWidth" ng-click="loadSourceFile()"><i class="ion-arrow-down-c" style="font-size: 22px;"></i></button></h3>
-            <h3 class="myItem">Edit dictionary&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<button class="button button-energized button-small floatR btnWidth" ng-click="edit()"><i class="ion-edit" style="font-size: 22px; color: rgb(0, 0, 0);"></i></button></h3>
+            <h3 class="myItem">Edit dictionary&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<button class="button button-energized button-small floatR btnWidth" ng-click="edit(); scroller.scrollTop()"><i class="ion-edit" style="font-size: 22px; color: rgb(0, 0, 0);"></i></button></h3>
             <h3 class="myItem">Learning order:</h3>
-            <ul class="list">
+            <ul class="list myItem3">
                 <li class="item item-checkbox">
                     <label class="checkbox">
                         <input type="radio" name="group" ng-model="settingsDirection" value="direct" ng-click="directionClick('direct')">
@@ -202,7 +198,7 @@
             </ul>
 
             <h3 class="myItem">Card frequency:&nbsp;&nbsp;&nbsp;&nbsp;<button class="button button-assertive button-small floatR btnWidth" font-size 17px;" ng-click="resetWeights()">Reset</button></h3>
-            <div class="list">
+            <div class="list myItem3">
                 <label class="item item-input">
                     <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i></span>
                     <strong>&nbsp; card weight:</strong>
@@ -234,9 +230,13 @@
 
         </div>
 
-        <!--------------------------------------------------------------------------------------------------------------------------------------------------->
-    </ion-content>  <!----------------------------------------------------------------------------------------------------------------------------------------------->
-    <!------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+    </div>
+
+
+
 
 
     <div class="tabs tabs-icon-only">
@@ -250,6 +250,7 @@
             <i class="icon ion-gear-a"></i>
         </a>
     </div>
+
 </body>
 
 </html>
