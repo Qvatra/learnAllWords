@@ -5,13 +5,15 @@
 
     vm.array = [];
     
-    vm.initialize = function () {
-        io.parseDictionary('/dutch.js').then(function (result) {
-            vm.array = result;
-            console.log('loading array --------------------------------');
-            console.log(result);
-        });
-    }
+    //vm.initialize = function () {
+    //    io.parseDictionary('/dutch.js').then(function (result) {
+    //        vm.array = result;
+    //        console.log('loading array --------------------------------');
+    //        console.log(result);
+    //    });
+    //}
+
+    vm.array = io.loadDictionary();
 
 
     vm.resetProgress = function () {
@@ -19,6 +21,7 @@
             item.r = 1;
             item.d = 1;
         });
+        io.saveDictionary(vm.array);
     }
 
 
@@ -134,6 +137,7 @@
         } else if (dir == 'r'){
             if (vm.array[vm.array.length - 1].r < 4) vm.array[vm.array.length - 1].r++;
         }
+        io.saveDictionary(vm.array);
     }
 
 
@@ -144,6 +148,7 @@
         } else if (dir == 'r') {
             if (vm.array[vm.array.length - 1].r > 1) vm.array[vm.array.length - 1].r--;
         }
+        io.saveDictionary(vm.array);
     }
 
 

@@ -30,7 +30,7 @@
 
 
     vm.getSettings(settingsService.initialize());
-    cardService.initialize();
+    //cardService.initialize();
 
     vm.home = function () {
         //console.log('home');

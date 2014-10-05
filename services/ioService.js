@@ -1,4 +1,4 @@
-﻿angular.module('app').service('ioService', ['$q', '$http', function ($q, $http) {
+﻿angular.module('app').service('ioService', ['$q', '$http', '$timeout', function ($q, $http, $timeout) {
     console.log('io');
     var vm = this;
 
@@ -19,6 +19,21 @@
 
         return deferred.promise;
     };
+
+
+
+    vm.saveDictionary = function (arr) {
+        $timeout(function () {
+            localStorage.setItem('dictionary', JSON.stringify(arr));
+        });
+    }
+
+
+
+    vm.loadDictionary = function () {
+        return JSON.parse(localStorage.getItem('dictionary'));
+    }
+
 
 
 }]);
