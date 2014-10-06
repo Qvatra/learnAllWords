@@ -54,7 +54,7 @@
             </div>
             <div class="row">
                 <div class="col-50 col-offset-25">
-                    <button ng-click="card(); getNextItem();" class="button button-balanced button-large button-full MyBtn cursive">Learn words</button>
+                    <button ng-click="checkDictionary()" class="button button-balanced button-large button-full MyBtn cursive">Learn words</button>
                 </div>
             </div>
         </div>
@@ -245,11 +245,11 @@
 
 
     <div class="tabs tabs-icon-only">
-        <a class="tab-item" ng-click="home()">
-            <i class="icon ion-home"></i>
-        </a>
-        <a class="tab-item" ng-click="card(); getNextItem();">
+        <a class="tab-item" ng-click="home(); getNextItem();">
             <i class="ion-android-book bookIcon"></i>
+        </a>
+        <a class="tab-item" ng-click="">
+            <i class="ion-information"></i>
         </a>
         <a class="tab-item" ng-click="settingsView()">
             <i class="icon ion-gear-a"></i>

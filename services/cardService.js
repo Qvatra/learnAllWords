@@ -1,9 +1,6 @@
 ﻿angular.module('app').service('cardService', ['$q', 'ioService', '$rootScope', '$ionicPopup', function ($q, io, $rootScope, $ionicPopup) {
     console.log('card');
-    console.log($rootScope.settings.direction);
     var vm = this;
-
-    vm.array = [];
 
     vm.array = io.loadDictionary();
 
@@ -23,7 +20,22 @@
     }
 
 
+
+    vm.needDictionary = function () {
+        return $ionicPopup.alert({
+            title: 'First you need to load or create dictionary!', // String. The title of the popup.
+            subTitle: '', // String (optional). The sub-title of the popup.
+            template: '', // String (optional). The html template to place in the popup body.
+            templateUrl: '', // String (optional). The URL of an html template to place in the popup   body.
+            okText: '', // String (default: 'OK'). The text of the OK button.
+            okType: '', // String (default: 'button-positive'). The type of the OK button.
+        })
+    }
+
+
+
     vm.calculateProgress = function (dir) {
+        if (vm.array.length == 0) return 0;
         var progress = 0;
 
         if (dir == 'direct') {

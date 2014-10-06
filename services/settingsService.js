@@ -5,7 +5,7 @@
     $rootScope.settings = { direction: 'direct', w1: '5', w2: '15', w3: '30', w4: '50' }; //initial feed
 
     vm.initialize = function () {
-        var savedSettings = JSON.parse(localStorage.getItem('settings'));
+        var savedSettings = (localStorage.getItem('settings')) ? JSON.parse(localStorage.getItem('settings')) : $rootScope.settings;
         if (savedSettings.direction) $rootScope.settings.direction = savedSettings.direction;
         if (savedSettings.w1) $rootScope.settings.w1 = savedSettings.w1;
         if (savedSettings.w2) $rootScope.settings.w2 = savedSettings.w2;

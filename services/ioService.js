@@ -32,7 +32,7 @@
 
 
     vm.loadDictionary = function () {
-        return JSON.parse(localStorage.getItem('dictionary'));
+        return (localStorage.getItem('dictionary')) ? JSON.parse(localStorage.getItem('dictionary')) : [];
     }
 
 

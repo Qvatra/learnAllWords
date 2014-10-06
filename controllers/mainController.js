@@ -1,4 +1,5 @@
 ﻿angular.module('app').controller('mainController', ['$scope', 'settingsService', 'ioService', 'cardService', '$rootScope', '$ionicScrollDelegate', function ($scope, settingsService, io, cardService, $rootScope, $ionicScrollDelegate) {
+    console.log('main');
     var vm = $scope;
 
     vm.cardService = cardService;
@@ -48,7 +49,16 @@
     //cardService.initialize();
 
 
-
+    vm.checkDictionary = function () {
+        if (cardService.array.length != 0) {
+            vm.card();
+            vm.getNextItem();
+        } else {
+            cardService.needDictionary().then(function () {
+                vm.settingsView();
+            });
+        }
+    }
 
 
     vm.card = function () {
