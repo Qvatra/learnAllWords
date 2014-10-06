@@ -1,4 +1,4 @@
-﻿angular.module('app').service('cardService', ['$q', 'ioService', '$rootScope', function ($q, io, $rootScope) {
+﻿angular.module('app').service('cardService', ['$q', 'ioService', '$rootScope', '$ionicPopup', function ($q, io, $rootScope, $ionicPopup) {
     console.log('card');
     console.log($rootScope.settings.direction);
     var vm = this;
@@ -43,8 +43,26 @@
             progress = progress / (2 * vm.array.length);
         }
 
-        console.log((progress - 1) * 100 / 3);
-        return (progress - 1) * 100 / 3;
+        progress = (progress - 1) * 100 / 3;
+
+        return progress;
+    }
+
+
+
+    vm.checkProgress = function () {
+        var dir = $rootScope.settings.direction;
+        if (vm.calculateProgress(dir) == 100) {
+            var direction = (dir == 'direct') ? 'W -> T' : ((dir == 'reserve') ? 'T -> W' : 'T -> W & W -> T');
+            $ionicPopup.alert({
+                title: 'Congratulations!', // String. The title of the popup.
+                subTitle: direction, // String (optional). The sub-title of the popup.
+                template: 'have been learned', // String (optional). The html template to place in the popup body.
+                templateUrl: '', // String (optional). The URL of an html template to place in the popup   body.
+                okText: '', // String (default: 'OK'). The text of the OK button.
+                okType: '', // String (default: 'button-positive'). The type of the OK button.
+            });
+        }
     }
 
 

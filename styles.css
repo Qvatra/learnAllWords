@@ -3,15 +3,15 @@
 }
 
 .hasHeader2 {
-    margin-top: 98px;
+    margin-top: 95px;
 }
 
 .hasFooter {
-    margin-bottom: 48px;
+    margin-bottom: 52px;
 }
 
 .hasFooter2 {
-    margin-bottom: 101px;
+    margin-bottom: 103px;
 }
 
 .red {
@@ -103,7 +103,6 @@
 
 .cursive {
     font-family: cursive;
-    color: rgb(169, 169, 169);
 }
 
 .myItem {
@@ -141,21 +140,24 @@
     font-size: 17px !important;
 }
 
+.confirmBar {
+    margin: 0px 59px 0px 29px;
+    padding:0px;
+}
+
 .noSpace {
     margin: 0px;
     padding: 0px;
 }
 
 .gradientR {
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255));
-    height: 54px;
-    border: rgb(0, 0, 0);
-}
-
-.gradientL {
-    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(255, 255, 255));
-    height: 54px;
-    border: rgb(0, 0, 0);
+background: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(255, 255, 255));
+height: 54px;
+border: rgb(65, 63, 63);
+border-width: 0px;
+border-style: solid;
+border-bottom-width: 3px;
+border-top-width: 2px;
 }
 
 .itemText {

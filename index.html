@@ -24,7 +24,6 @@
 <body ng-controller="mainController" class="grey">
     <div class="bar bar-header bar-light">
         <div class="h1 title">Word Trainer</div>
-        <button class="button button-icon icon ion-navicon"></button>
     </div>
 
 
@@ -39,7 +38,7 @@
             <div class="row">
                 <div class="col">
                     <div class="centerTxt">
-                        <h1 class="cursive">Current progress:</h1><br />
+                        <h1 class="cursive" style="color: rgb(169, 169, 169);">Current progress:</h1><br />
                         <h3 ng-style="dirColorStyle">Word <i class="ion-arrow-right-c"></i> Translation: {{progressDir.toPrecision(3)}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'direct'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'direct'">&nbsp;&nbsp;</span></h3>
                         <h3 ng-style="revColorStyle">Translation <i class="ion-arrow-right-c"></i> Word: {{progressRev.toPrecision(3)}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'reverse'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'reverse'">&nbsp;&nbsp;</span></h3>
                         <h3 ng-style="bothColorStyle">W <i class="ion-arrow-right-c"></i> T&nbsp;&nbsp;and&nbsp;&nbsp;T <i class="ion-arrow-right-c"></i> W : {{progressBoth.toPrecision(3)}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'both'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'both'">&nbsp;&nbsp;</span></h3><br /><br />
@@ -55,7 +54,7 @@
             </div>
             <div class="row">
                 <div class="col-50 col-offset-25">
-                    <button ng-click="card(); getNextItem();" class="button button-balanced button-large button-full MyBtn">Learn words</button>
+                    <button ng-click="card(); getNextItem();" class="button button-balanced button-large button-full MyBtn cursive">Learn words</button>
                 </div>
             </div>
         </div>
@@ -68,7 +67,7 @@
             <div class="row">
                 <div class="col-50 col-offset-25">
                     <div class="centerTxt">
-                        <h1 class="noMargin" ng-style="colorStyle">Progress: {{progress.toPrecision(3)}}&nbsp;%</h1>
+                        <h1 class="noMargin cursive" ng-style="colorStyle">Progress: {{progress.toPrecision(3)}}&nbsp;%</h1>
                     </div>
                     <div class="progressBar" ng-style="progressBarStyle"></div>
                 </div>
@@ -104,7 +103,7 @@
                 <div class="row cardHeight MyBtn"></div>
                 <div class="row">
                     <div class="col-50 col-offset-25">
-                        <button ng-click="rate()" class="button button-balanced button-large button-full MyBtn">Show translation</button>
+                        <button ng-click="rate()" class="button button-balanced button-large button-full MyBtn cursive">Translate</button>
                     </div>
                 </div>
             </div>
@@ -122,10 +121,10 @@
                 </div><br />
                 <div class="row">
                     <div class="col-33 col-offset-10">
-                        <button ng-click="wrong(); card(); getNextItem();" class="button button-assertive button-large button-full MyBtn">Wrong</button>
+                        <button ng-click="wrong(); card(); getNextItem();" class="button button-assertive button-large button-full MyBtn cursive">Wrong</button>
                     </div>
                     <div class="col-33 col-offset-10">
-                        <button ng-click="correct(); card(); getNextItem();" class="button button-balanced button-large button-full MyBtn">Correct</button>
+                        <button ng-click="correct(); card(); getNextItem(); cardService.checkProgress()" class="button button-balanced button-large button-full MyBtn cursive">Correct</button>
                     </div>
                 </div>
             </div>
@@ -148,7 +147,7 @@
                 <div ng-repeat="item in cardService.array track by $index" class="myItem2">
                     <div class="list card noSpace">
                         <div class="item item-button-right editItem">
-                            <input type="text" class="item-input editInput" ng-model="item.w" placeholder="Word" disabled />
+                            <input type="text" class="item-input editInput" ng-model="item.w" placeholder="Word" />
                             <input type="text" class="item-input editInput" ng-model="item.t" placeholder="Translation" />
                             <button class="button button-assertive" ng-click="cardService.deleteItem($index)">
                                 <i class="ion-minus-round"></i>
@@ -159,10 +158,16 @@
             </ion-content>
 
 
-            <div class="tabs hasFooter grey noBorder floatL">
-                <button class="button button-balanced button-small confirmWidth" ng-click="ioService.saveDictionary(cardService.array)">Save</button>
-                <button class="button button-stable button-small confirmWidth" ng-click="ioService.loadDictionary(); home();">Cancel</button>
-                <button class="button button-assertive button-small confirmWidth" ng-click="cardService.deleteAll()">Delete all</button>
+            <div class="tabs hasFooter grey noBorder">
+                <div class="row confirmBar">
+                    <div class="col-67">
+                        <button class="button button-balanced confirmWidth" ng-click="ioService.saveDictionary(cardService.array)">Save</button>
+                        <button class="button button-stable confirmWidth" ng-click="ioService.loadDictionary(); home();">Cancel</button>
+                    </div>
+                    <div class="col-33">
+                        <button class="button button-assertive confirmWidth floatR" ng-click="cardService.deleteAll()">Delete all</button>
+                    </div>
+                </div>
             </div>
 
         </div>
