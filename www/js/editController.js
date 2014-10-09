@@ -1,13 +1,12 @@
 ﻿angular.module('controllers')
 
-.controller('EditCtrl', ['$scope', '$rootScope', 'ioService', '$q', '$ionicPopup', function ($scope, $rootScope, ioService, $q, $ionicPopup) {
+.controller('EditCtrl', ['$scope', '$rootScope', 'ioService', '$q', '$ionicPopup', '$ionicScrollDelegate', function ($scope, $rootScope, ioService, $q, $ionicPopup, $ionicScrollDelegate) {
     console.log('EditCtrl');
     var vm = $scope;
 
 
     if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
     vm.array = $rootScope.dictionary;
-
 
 
     vm.save = function () {
@@ -55,6 +54,9 @@
         console.log(vm.array);
         vm.array.push({ w: '', t: '', d: 1, r: 1 });
         $rootScope.dictionary = vm.array;
+
+        //scrollToBottom
+        $ionicScrollDelegate.scrollBottom();
     }
 
 
