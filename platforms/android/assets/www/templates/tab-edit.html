@@ -1,0 +1,35 @@
+<ion-view title="Edit">
+  <ion-content class="padding">
+      <div class="item item-button-right editItem myItem2 gradientR">
+          <div class="itemText">Add new item</div>
+          <button class="button button-balanced" ng-click="cardService.addItem(); scroller.scrollBottom()"><i class="ion-plus-round"></i></button>
+      </div>
+
+      <ion-content delegate-handle="scroll" class="hasHeader2 grey hasFooter2" scrollbar-y="true">
+          <div ng-repeat="item in cardService.array track by $index" class="myItem2">
+              <div class="list card noSpace">
+                  <div class="item item-button-right editItem">
+                      <input type="text" class="item-input editInput" ng-model="item.w" placeholder="Word" />
+                      <input type="text" class="item-input editInput" ng-model="item.t" placeholder="Translation" />
+                      <button class="button button-assertive" ng-click="cardService.deleteItem($index)">
+                          <i class="ion-minus-round"></i>
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </ion-content>
+
+
+      <div class="tabs hasFooter grey noBorder">
+          <div class="row confirmBar">
+              <div class="col-67">
+                  <button class="button button-balanced confirmWidth" ng-click="ioService.saveDictionary(cardService.array)">Save</button>
+                  <button class="button button-stable confirmWidth" ng-click="ioService.loadDictionary(); home();">Cancel</button>
+              </div>
+              <div class="col-33">
+                  <button class="button button-assertive confirmWidth floatR" ng-click="cardService.deleteAll()">Delete all</button>
+              </div>
+          </div>
+      </div>
+  </ion-content>
+</ion-view>

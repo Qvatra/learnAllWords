@@ -1,0 +1,68 @@
+<ion-view title="Card">
+    <ion-content class="padding">
+        <div class="row">
+            <div class="col-50 col-offset-25">
+                <div class="centerTxt">
+                    <h1 class="noMargin cursive" ng-style="colorStyle">Progress: {{progress}}&nbsp;%</h1>
+                </div>
+                <div class="progressBar" ng-style="progressBarStyle"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-50 col-offset-25 green">
+                <div class="card">
+                    <div class="item item-text-wrap">
+                        <div class="floatL">
+                            {{card.w}}
+                        </div>
+                        <div class="floatR">
+                            <div ng-show="current.weight == 1">
+                                <i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
+                            </div>
+                            <div ng-show="current.weight == 2">
+                                <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
+                            </div>
+                            <div ng-show="current.weight == 3">
+                                <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i>
+                            </div>
+                            <div ng-show="current.weight == 4">
+                                <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br />
+
+
+        <div ng-show="mode === 'question'">
+            <div class="row cardHeight MyBtn"></div>
+            <div class="row">
+                <div class="col-50 col-offset-25">
+                    <button ng-click="answer()" class="button button-balanced button-large button-full MyBtn cursive">Translate</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div ng-show="mode === 'answer'">
+            <div class="row">
+                <div class="col-50 col-offset-25 blue">
+                    <div class="card">
+                        <div class="item item-text-wrap">
+                            {{card.t}}
+                        </div>
+                    </div>
+                </div>
+            </div><br />
+            <div class="row">
+                <div class="col-33 col-offset-10">
+                    <button ng-click="wrong()" class="button button-assertive button-large button-full MyBtn cursive">Wrong</button>
+                </div>
+                <div class="col-33 col-offset-10">
+                    <button ng-click="correct()" class="button button-balanced button-large button-full MyBtn cursive">Correct</button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
