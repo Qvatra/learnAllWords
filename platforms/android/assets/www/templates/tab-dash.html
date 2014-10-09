@@ -4,9 +4,9 @@
           <div class="col">
               <div class="centerTxt">
                   <h1 class="cursive" style="color: rgb(169, 169, 169);">Current progress:</h1><br />
-                  <h3 ng-style="dirColorStyle">Word <i class="ion-arrow-right-c"></i> Translation: {{progressDir.toPrecision(3)}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'direct'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'direct'">&nbsp;&nbsp;</span></h3>
-                  <h3 ng-style="revColorStyle">Translation <i class="ion-arrow-right-c"></i> Word: {{progressRev.toPrecision(3)}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'reverse'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'reverse'">&nbsp;&nbsp;</span></h3>
-                  <h3 ng-style="bothColorStyle">W <i class="ion-arrow-right-c"></i> T&nbsp;&nbsp;and&nbsp;&nbsp;T <i class="ion-arrow-right-c"></i> W : {{progressBoth.toPrecision(3)}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'both'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'both'">&nbsp;&nbsp;</span></h3><br /><br />
+                  <h3 ng-style="colorDir">Word <i class="ion-arrow-right-c"></i> Translation: {{progressDir}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'direct'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'direct'">&nbsp;&nbsp;</span></h3>
+                  <h3 ng-style="colorRev">Translation <i class="ion-arrow-right-c"></i> Word: {{progressRev}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'reverse'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'reverse'">&nbsp;&nbsp;</span></h3>
+                  <h3 ng-style="colorBoth">W <i class="ion-arrow-right-c"></i> T&nbsp;&nbsp;and&nbsp;&nbsp;T <i class="ion-arrow-right-c"></i> W : {{progressBoth}} %&nbsp;&nbsp;<i ng-show="settingsDirection == 'both'" class="ion-checkmark-round"></i><span ng-hide="settingsDirection == 'both'">&nbsp;&nbsp;</span></h3><br /><br />
               </div>
           </div>
       </div>
@@ -19,7 +19,7 @@
       </div>
       <div class="row">
           <div class="col-50 col-offset-25">
-              <button ng-click="checkDictionary()" class="button button-balanced button-large button-full MyBtn cursive">Learn words</button>
+              <button ng-click="start()" class="button button-balanced button-large button-full MyBtn cursive">Start</button>
           </div>
       </div>
   </ion-content>

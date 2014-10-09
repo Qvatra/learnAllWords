@@ -1,8 +1,25 @@
-﻿angular.module('app').service('ioService', ['$q', '$http', '$timeout', function ($q, $http, $timeout) {
+﻿angular.module('services').service('ioService', ['$rootScope', '$q', '$http', '$timeout', function ($rootScope, $q, $http, $timeout) {
     console.log('io');
     var vm = this;
 
-    vm.parseDictionary = function (filepath) {
+    //var deferred = $q.defer();
+    //deferred.resolve();
+    //return deferred.promise;
+
+    vm.initialize = function () {
+        $rootScope.dictionary = (localStorage.getItem('dictionary')) ? JSON.parse(localStorage.getItem('dictionary')) : [];
+        $rootScope.settings = (localStorage.getItem('settings')) ? JSON.parse(localStorage.getItem('settings')) : { direction: 'both', w1: '5', w2: '15', w3: '30', w4: '50' };
+    }
+
+
+    vm.saveDictionary = function (arr) {
+        $timeout(function () {
+            localStorage.setItem('dictionary', JSON.stringify(arr));
+        });
+    }
+
+    
+    vm.importDictioinary = function (filepath) {
         var deferred = $q.defer();
 
         $http.get(filepath)
@@ -14,27 +31,12 @@
                 vm.saveDictionary(array);
                 deferred.resolve(array);
             }).error(function (data, status, headers, config) {
-                console.log('ioService: read failed');
-                deferred.reject(dta);
+                console.log('ioService: import failed');
+                deferred.reject(data);
             });
 
         return deferred.promise;
-    };
-
-
-
-    vm.saveDictionary = function (arr) {
-        $timeout(function () {
-            localStorage.setItem('dictionary', JSON.stringify(arr));
-        });
     }
-
-
-
-    vm.loadDictionary = function () {
-        return (localStorage.getItem('dictionary')) ? JSON.parse(localStorage.getItem('dictionary')) : [];
-    }
-
 
 
 }]);

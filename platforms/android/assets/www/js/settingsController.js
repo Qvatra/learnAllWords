@@ -1,14 +1,7 @@
-angular.module('starter.controllers', [])
-
-.controller('DashCtrl', function ($scope) {
-})
-
-.controller('EditCtrl', function ($scope) {
-
-})
+﻿angular.module('controllers')
 
 .controller('SettingsCtrl', ['$scope', '$state', function ($scope, $state) {
-    vm = $scope;
+    var vm = $scope;
 
     vm.edit = function () {
         console.log('edit');

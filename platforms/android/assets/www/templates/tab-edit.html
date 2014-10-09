@@ -5,8 +5,8 @@
           <button class="button button-balanced" ng-click="cardService.addItem(); scroller.scrollBottom()"><i class="ion-plus-round"></i></button>
       </div>
 
-      <ion-content delegate-handle="scroll" class="hasHeader2 grey hasFooter2" scrollbar-y="true">
-          <div ng-repeat="item in cardService.array track by $index" class="myItem2">
+      <div class="hasHeader2 grey hasFooter2">
+          <div ng-repeat="item in array track by $index" class="myItem2">
               <div class="list card noSpace">
                   <div class="item item-button-right editItem">
                       <input type="text" class="item-input editInput" ng-model="item.w" placeholder="Word" />
@@ -17,7 +17,7 @@
                   </div>
               </div>
           </div>
-      </ion-content>
+      </div>
 
 
       <div class="tabs hasFooter grey noBorder">
@@ -28,6 +28,7 @@
               </div>
               <div class="col-33">
                   <button class="button button-assertive confirmWidth floatR" ng-click="cardService.deleteAll()">Delete all</button>
+                  <button class="button button-assertive confirmWidth floatR" ng-click="importDictioinary()">Import file</button>
               </div>
           </div>
       </div>
