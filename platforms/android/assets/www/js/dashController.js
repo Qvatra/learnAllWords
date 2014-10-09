@@ -4,7 +4,7 @@
     console.log('DashCtrl');
     var vm = $scope;
 
-    ioService.initialize(); //dictionary, settings
+    if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
 
     vm.progressDir = cardService.calculateProgress('direct');
     vm.progressRev = cardService.calculateProgress('reverse');
@@ -19,7 +19,7 @@
             $state.go('tab.card', {});
         } else {
             $ionicPopup.alert({ title: 'First you need to load or create a dictionary!' }).then(function () {
-                $state.go('tab.settings', {});
+                $state.go('tab.edit', {});
             });
         }
     }
