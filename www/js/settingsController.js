@@ -41,7 +41,7 @@
             vm.settings.w1 = oldValue;
             return;
         }
-        $rootScope.settings.w1 = newValue;
+
         vm.calculateFrequency();
         ioService.saveSettings();
     });
@@ -51,7 +51,7 @@
             vm.settings.w2 = oldValue;
             return;
         }
-        $rootScope.settings.w2 = newValue;
+
         vm.calculateFrequency();
         ioService.saveSettings();
     });
@@ -61,7 +61,7 @@
             vm.settings.w3 = oldValue;
             return;
         }
-        $rootScope.settings.w3 = newValue;
+
         vm.calculateFrequency();
         ioService.saveSettings();
     });
@@ -71,8 +71,14 @@
             vm.settings.w4 = oldValue;
             return;
         }
-        $rootScope.settings.w4 = newValue;
+
         vm.calculateFrequency();
+        ioService.saveSettings();
+    });
+
+    vm.$watch('settings.direction', function (newValue, oldValue) {
+        if (!newValue || newValue == oldValue) return;
+
         ioService.saveSettings();
     });
 
