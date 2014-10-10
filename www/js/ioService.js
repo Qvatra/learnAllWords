@@ -18,6 +18,13 @@
         });
     }
 
+
+    vm.saveSettings = function () {
+        $timeout(function () {
+            localStorage.setItem('settings', JSON.stringify($rootScope.settings));
+        });
+    }
+
     
     vm.importDictioinary = function (filepath) {
         var deferred = $q.defer();

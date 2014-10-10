@@ -1,1 +1,11 @@
 
+platforms/android/CordovaLib/ant-build/build.prop
+platforms/android/ant-build/build.prop
+platforms/android/ant-build/learnWords-debug-unaligned.apk
+platforms/android/ant-build/learnWords-debug.apk
+platforms/android/ant-build/learnWords.ap_
+platforms/android/assets/www/js/ioService.js
+platforms/android/assets/www/js/settingsController.js
+platforms/android/assets/www/learnWords.v12.suo
+platforms/android/assets/www/templates/tab-settings.html
+platforms/android/res/xml/config.xml
