@@ -8,6 +8,8 @@
     vm.progress;
     vm.mode;
     vm.currentDirection;
+    vm.colorProgress;
+    vm.progressBarStyle;
 
     if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
 
@@ -24,7 +26,6 @@
     vm.nextCard = function () {
         var r = Math.random() * ($rootScope.settings.w1 + $rootScope.settings.w2 + $rootScope.settings.w3 + $rootScope.settings.w4);
         var w;
-        
 
         if (r <= $rootScope.settings.w1) w = 4;
         else if (r <= $rootScope.settings.w1 + $rootScope.settings.w2) w = 3;
@@ -40,6 +41,10 @@
         if (!item) {
             return vm.nextCard();
         } else {
+            vm.progress = cardService.calculateProgress($rootScope.settings.direction);
+            vm.colorProgress = { color: cardService.calculateColor($rootScope.settings.direction), fontFamily: 'cursive' };
+            vm.progressBarStyle = { background: cardService.calculateColor($rootScope.settings.direction), width: vm.progress + '%' };
+
             console.log('printing array --------------------------------');
             console.log('random = ' + r + '%, weight = ' + w + ', dir: ' + item.dir);
             $rootScope.dictionary.forEach(function (item) {
@@ -80,10 +85,6 @@
         else return null;
     }
 
-    vm.getProgress = function () {
-        return progress = (vm.currentDirection == 'direct') ? cardService.calculateProgress('direct') : cardService.calculateProgress('reverse');
-    }
-
     vm.answer = function () {
         vm.mode = 'answer';
     }
@@ -92,14 +93,12 @@
         vm.mode = 'question';
         vm.setWeightForCurrent(1);
         vm.card = vm.nextCard();
-        vm.progress = vm.getProgress();
     }
 
     vm.wrong = function () {
         vm.mode = 'question';
         vm.setWeightForCurrent(-1);
         vm.card = vm.nextCard();
-        vm.progress = vm.getProgress();
     }
 
     vm.setWeightForCurrent = function (dw) {
@@ -117,7 +116,6 @@
 
 
     vm.card = vm.nextCard();
-    vm.progress = vm.getProgress();
     vm.mode = 'question';
 
 }])

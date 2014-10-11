@@ -1,6 +1,6 @@
 ﻿angular.module('controllers')
 
-.controller('SettingsCtrl', ['$scope', '$rootScope', '$state', 'ioService', function ($scope, $rootScope, $state, ioService) {
+.controller('SettingsCtrl', ['$scope', '$rootScope', '$state', 'ioService', 'cardService', function ($scope, $rootScope, $state, ioService, cardService) {
     console.log('settingsController');
     var vm = $scope;
 
@@ -34,6 +34,12 @@
         vm.calculateFrequency();
         ioService.saveSettings();
     }
+
+    vm.resetProgress = function () {
+        cardService.resetProgress();
+        ioService.saveDictionary($rootScope.dictionary);
+    }
+
 
 
     vm.$watch('settings.w1', function (newValue, oldValue) {

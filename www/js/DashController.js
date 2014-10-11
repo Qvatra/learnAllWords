@@ -9,10 +9,9 @@
     vm.progressDir = cardService.calculateProgress('direct');
     vm.progressRev = cardService.calculateProgress('reverse');
     vm.progressBoth = cardService.calculateProgress('both');
-    vm.colorDir = cardService.calculateColor('direct');
-    vm.colorRev = cardService.calculateColor('reverse');
-    vm.colorBoth = cardService.calculateColor('both');
-
+    vm.colorDir = {color: cardService.calculateColor('direct'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'direct') ? 'underline': 'inherit'};
+    vm.colorRev = { color: cardService.calculateColor('reverse'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'reverse') ? 'underline': 'inherit'};
+    vm.colorBoth = { color: cardService.calculateColor('both'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'both') ? 'underline': 'inherit'};
 
     vm.start = function () {
         if ($rootScope.dictionary.length != 0) {

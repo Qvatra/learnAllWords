@@ -36,6 +36,14 @@
 
 
 
+    vm.resetProgress = function () {
+        if ($rootScope.dictionary.length == 0) return;
+
+        $rootScope.dictionary.forEach(function (item) {
+            item.r = 1;
+            item.d = 1;
+        });
+    }
 
 
 }]);
