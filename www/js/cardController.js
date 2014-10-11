@@ -4,10 +4,27 @@
     console.log('CardCtrl');
     var vm = $scope;
 
+    vm.card;
+    vm.progress;
+    vm.mode;
+    vm.currentDirection;
+
+    if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
+
+    vm.detectDirection = function () {
+        if ($rootScope.settings.direction == 'direct') {
+            vm.currentDirection = 'direct';
+        } else if ($rootScope.settings.direction == 'reverse') {
+            vm.currentDirection = 'reverse';
+        } else if ($rootScope.settings.direction == 'both') {
+            vm.currentDirection = (Math.random() > 0.5) ? 'direct' : 'reverse';
+        }
+    }
+
     vm.nextCard = function () {
         var r = Math.random() * ($rootScope.settings.w1 + $rootScope.settings.w2 + $rootScope.settings.w3 + $rootScope.settings.w4);
         var w;
-        var item;
+        
 
         if (r <= $rootScope.settings.w1) w = 4;
         else if (r <= $rootScope.settings.w1 + $rootScope.settings.w2) w = 3;
@@ -16,13 +33,9 @@
 
         console.log('r=' + r + ' w=' + w);
 
-        if ($rootScope.settings.direction == 'direct') {
-            item = vm.getDirect(w);
-        } else if ($rootScope.settings.direction == 'reverse') {
-            item = vm.getReverse(w);
-        } else if ($rootScope.settings.direction == 'both') {
-            item = (Math.random() > 0.5) ? vm.getDirect(w) : vm.getReverse(w);
-        }
+        vm.detectDirection();
+
+        var item = (vm.currentDirection == 'direct') ? vm.getDirect(w) : vm.getReverse(w);
 
         if (!item) {
             return vm.nextCard();
@@ -67,21 +80,9 @@
         else return null;
     }
 
-
     vm.getProgress = function () {
-        var progress;
-
-        if ($rootScope.settings.direction == 'direct') {
-            progress = cardService.calculateProgress('direct');
-        } else if ($rootScope.settings.direction == 'reverse') {
-            progress = cardService.calculateProgress('reverse');
-        } else if ($rootScope.settings.direction == 'both') {
-            progress = (Math.random() > 0.5) ? cardService.calculateProgress('direct') : cardService.calculateProgress('reverse');
-        }
-
-        return progress;
+        return progress = (vm.currentDirection == 'direct') ? cardService.calculateProgress('direct') : cardService.calculateProgress('reverse');
     }
-
 
     vm.answer = function () {
         vm.mode = 'answer';
@@ -89,14 +90,29 @@
 
     vm.correct = function () {
         vm.mode = 'question';
+        vm.setWeightForCurrent(1);
         vm.card = vm.nextCard();
         vm.progress = vm.getProgress();
     }
 
     vm.wrong = function () {
         vm.mode = 'question';
+        vm.setWeightForCurrent(-1);
         vm.card = vm.nextCard();
         vm.progress = vm.getProgress();
+    }
+
+    vm.setWeightForCurrent = function (dw) {
+        var current = $rootScope.dictionary[$rootScope.dictionary.length - 1];
+
+        if (vm.currentDirection == 'direct') {
+            if (current.d + dw < 5 && current.d + dw > 0) current.d += dw;
+        } else if (vm.currentDirection == 'reverse') {
+            if (current.r + dw < 5 && current.r + dw > 0) current.r += dw;
+        }
+
+        $rootScope.dictionary[$rootScope.dictionary.length - 1] = current;
+        ioService.saveDictionary($rootScope.dictionary);
     }
 
 

@@ -1,5 +1,6 @@
 <ion-view title="Card">
     <ion-content class="padding">
+
         <div class="row">
             <div class="col-50 col-offset-25">
                 <div class="centerTxt">
@@ -35,7 +36,7 @@
         </div><br />
 
 
-        <div ng-show="mode === 'question'">
+        <div ng-show="mode == 'question'">
             <div class="row cardHeight MyBtn"></div>
             <div class="row">
                 <div class="col-50 col-offset-25">
@@ -45,7 +46,7 @@
         </div>
 
 
-        <div ng-show="mode === 'answer'">
+        <div ng-show="mode == 'answer'">
             <div class="row">
                 <div class="col-50 col-offset-25 blue">
                     <div class="card">
@@ -64,5 +65,6 @@
                 </div>
             </div>
         </div>
+
     </ion-content>
 </ion-view>
