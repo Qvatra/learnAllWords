@@ -1,6 +1,6 @@
 ﻿angular.module('controllers')
 
-.controller('SettingsCtrl', ['$scope', '$rootScope', '$state', 'ioService', 'cardService', function ($scope, $rootScope, $state, ioService, cardService) {
+.controller('SettingsCtrl', ['$scope', '$rootScope', '$state', 'ioService', 'cardService', '$ionicPopup', function ($scope, $rootScope, $state, ioService, cardService, $ionicPopup) {
     console.log('settingsController');
     var vm = $scope;
 
@@ -21,21 +21,35 @@
 
 
     if (!$rootScope.settings) ioService.initialize(); //dictionary, settings
-    vm.settings = $rootScope.settings;
+    vm.settings = JSON.parse(JSON.stringify($rootScope.settings)); //pass-by-value
     vm.calculateFrequency();
     vm.progress = cardService.calculateProgress(vm.settings.direction);
-    
+
 
 
     vm.resetWeights = function () {
-        $rootScope.settings.w1 = 5;
-        $rootScope.settings.w2 = 15;
-        $rootScope.settings.w3 = 30;
-        $rootScope.settings.w4 = 50;
+        vm.settings.w1 = 5;
+        vm.settings.w2 = 15;
+        vm.settings.w3 = 30;
+        vm.settings.w4 = 50;
 
         vm.calculateFrequency();
+        $rootScope.settings = vm.settings;
         ioService.saveSettings();
     }
+
+
+    vm.saveWeights = function () {
+        if (vm.f1 < 5 || vm.f2 < 5 || vm.f3 < 5 || vm.f4 < 5) {
+            $ionicPopup.alert({ title: 'Can not Save!', template: 'Frequency values can not be less then 5 %.' });
+        } else {
+            $rootScope.settings = vm.settings;
+            ioService.saveSettings();
+
+            $ionicPopup.alert({ title: 'Saved!' });
+        }
+    }
+
 
     vm.resetProgress = function () {
         cardService.resetProgress();
@@ -52,7 +66,6 @@
         }
 
         vm.calculateFrequency();
-        ioService.saveSettings();
     });
 
     vm.$watch('settings.w2', function (newValue, oldValue) {
@@ -62,7 +75,6 @@
         }
 
         vm.calculateFrequency();
-        ioService.saveSettings();
     });
 
     vm.$watch('settings.w3', function (newValue, oldValue) {
@@ -72,7 +84,6 @@
         }
 
         vm.calculateFrequency();
-        ioService.saveSettings();
     });
 
     vm.$watch('settings.w4', function (newValue, oldValue) {
@@ -82,7 +93,6 @@
         }
 
         vm.calculateFrequency();
-        ioService.saveSettings();
     });
 
     vm.$watch('settings.direction', function (newValue, oldValue) {

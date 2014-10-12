@@ -54,10 +54,10 @@
 
 <ion-footer-bar align-title="left" class="noPadding btnBar">
     <div ng-show="mode == 'answer'" class="button-bar">
-        <a class="button button-assertive btnTxt cursive" ng-click="wrong()"><h3>Wrong</h3></a>
-        <a class="button button-balanced btnTxt cursive" ng-click="correct()"><h3>Correct</h3></a>
+        <a class="button button-assertive btnTxt cursive" ng-click="wrong()"><h3 class="cardBtnTxt">Wrong</h3></a>
+        <a class="button button-balanced btnTxt cursive" ng-click="correct()"><h3 class="cardBtnTxt">Correct</h3></a>
     </div>
     <div ng-show="mode == 'question'" class="button-bar">
-        <a class="button button-balanced btnTxt cursive" ng-click="answer()"><h3>Translate</h3></a>
+        <a class="button button-balanced btnTxt cursive" ng-click="answer()"><h3 class="cardBtnTxt">Translate</h3></a>
     </div>
 </ion-footer-bar>

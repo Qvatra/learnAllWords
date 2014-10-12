@@ -39,6 +39,11 @@
     }
 
 
+    vm.export = function () {
+
+    }
+
+
     vm.deleteAll = function () {
         $ionicPopup.confirm({ title: 'Are you sure?', template: 'You are about to delete all items in the dictionary', cancelType: 'button-positive', okType: 'button-balanced' })
             .then(function (ok) {

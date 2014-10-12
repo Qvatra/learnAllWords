@@ -6,13 +6,6 @@
 
     if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
 
-    vm.progressDir = cardService.calculateProgress('direct');
-    vm.progressRev = cardService.calculateProgress('reverse');
-    vm.progressBoth = cardService.calculateProgress('both');
-    vm.colorDir = {color: cardService.calculateColor('direct'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'direct') ? 'underline': 'inherit'};
-    vm.colorRev = { color: cardService.calculateColor('reverse'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'reverse') ? 'underline': 'inherit'};
-    vm.colorBoth = { color: cardService.calculateColor('both'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'both') ? 'underline': 'inherit'};
-
     vm.start = function () {
         if ($rootScope.dictionary.length != 0) {
             $state.go('tab.card', {});
@@ -23,5 +16,41 @@
         }
     }
 
+    vm.calculateProgresses = function () {
+        vm.progressDir = cardService.calculateProgress('direct');
+        vm.progressRev = cardService.calculateProgress('reverse');
+        vm.progressBoth = cardService.calculateProgress('both');
+    }
 
+    vm.calculateColors = function () {
+        vm.colorDir = { color: cardService.calculateColor('direct'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'direct') ? 'underline' : 'inherit' };
+        vm.colorRev = { color: cardService.calculateColor('reverse'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'reverse') ? 'underline' : 'inherit' };
+        vm.colorBoth = { color: cardService.calculateColor('both'), fontFamily: 'cursive', textDecoration: ($rootScope.settings.direction == 'both') ? 'underline' : 'inherit' };
+
+    }
+
+    vm.direct = function () {
+        $rootScope.settings.direction = 'direct';
+        ioService.saveSettings();
+        vm.calculateColors();
+    }
+
+    vm.reverse = function () {
+        $rootScope.settings.direction = 'reverse';
+        ioService.saveSettings();
+        vm.calculateColors();
+    }
+
+    vm.both = function () {
+        $rootScope.settings.direction = 'both';
+        ioService.saveSettings();
+        vm.calculateColors();
+    }
+
+    vm.about = function () {
+        $ionicPopup.alert({ title: 'Learn Cards App, 2014', template: 'created by Oleksandr Zinchenko<br />e-mail: mail2zin@gmail.com' });
+    }
+
+    vm.calculateProgresses();
+    vm.calculateColors();
 }])

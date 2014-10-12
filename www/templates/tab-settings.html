@@ -1,5 +1,5 @@
 <ion-view title="Settings">
-    <ion-content class="padding">
+    <ion-content class="padding" style="bottom: 50px;">
         <h3>Learning order:</h3>
         <ul>
             <li class="item item-checkbox settingsItem">
@@ -18,16 +18,20 @@
                 <label class="checkbox">
                     <input type="radio" name="group" ng-model="settings.direction" value="both" ng-click="directionClick('both')">
                 </label>
-                <strong>W <i class="ion-arrow-right-c"></i> T</strong> and <strong>T <i class="ion-arrow-right-c"></i> W</strong>
+                <strong>W <i class="ion-arrow-right-c"></i> T</strong> or <strong>T <i class="ion-arrow-right-c"></i> W</strong>
             </li>
         </ul>
 
-        <h3>Card frequency:<button class="button button-assertive button-small floatR" ng-click="resetWeights()">Reset</button></h3>
+        <h3>
+            Card frequency:
+            <button class="button button-assertive button-small settingsBtn floatR" ng-click="resetWeights()"><h3 class="settingsBtnTxt">Reset</h3></button>
+            <button class="button button-balanced button-small settingsBtn floatR" ng-click="saveWeights()"><h3 class="settingsBtnTxt">Save</h3></button>
+        </h3>
         <div class="settingsItem">
             <div class="item-input-inset" style="padding: 10px 8px 10px 16px;">
                 <div class="itemContent"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><strong style="margin-left: 14px;">weight:</strong></div>
                 <label class="item-input-wrapper inputWeight">
-                    <input type="number" ng-model="settings.w1">
+                    <input type="number" min="1" max="99" ng-model="settings.w1">
                 </label>
                 <div>({{f1}}%)</div>
             </div>
@@ -36,7 +40,7 @@
             <div class="item-input-inset" style="padding: 10px 8px 10px 16px;">
                 <div class="itemContent"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><strong style="margin-left: 14px;">weight:</strong></div>
                 <label class="item-input-wrapper inputWeight">
-                    <input type="number" ng-model="settings.w2">
+                    <input type="number" min="1" max="99" ng-model="settings.w2">
                 </label>
                 <div>({{f2}}%)</div>
             </div>
@@ -45,7 +49,7 @@
             <div class="item-input-inset" style="padding: 10px 8px 10px 16px;">
                 <div class="itemContent"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><strong style="margin-left: 14px;">weight:</strong></div>
                 <label class="item-input-wrapper inputWeight">
-                    <input type="number" ng-model="settings.w3">
+                    <input type="number" min="1" max="99" ng-model="settings.w3">
                 </label>
                 <div>({{f3}}%)</div>
             </div>
@@ -54,13 +58,13 @@
             <div class="item-input-inset" style="padding: 10px 8px 10px 16px;">
                 <div class="itemContent"><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><strong style="margin-left: 14px;">weight:</strong></div>
                 <label class="item-input-wrapper inputWeight">
-                    <input type="number" ng-model="settings.w4">
+                    <input type="number" min="1" max="99" ng-model="settings.w4">
                 </label>
                 <div>({{f4}}%)</div>
             </div>
         </div>
 
-        <h3>Progress: {{progress}}&nbsp;%&nbsp;&nbsp;<button class="button button-assertive button-small floatR btnWidth" ng-click="resetProgress();">Reset</button></h3>
+        <h3>Progress: {{progress}}&nbsp;%&nbsp;&nbsp;<button class="button button-assertive button-small settingsBtn floatR" ng-click="resetProgress();"><h3 class="settingsBtnTxt">Reset</h3></button></h3>
 
     </ion-content>
 </ion-view>

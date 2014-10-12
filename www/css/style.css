@@ -24,9 +24,27 @@ ion-content {
     font-family: cursive;
 }
 
+.dashBtnTxt {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-family: cursive;
+    padding-top: 2px;
+}
+
+.dashFooter {
+    display: block;
+    background: rgb(47, 79, 79);
+    bottom: 0px !important;
+}
+
+.dashAbout {
+    margin: -48px 20px 0px 0px;
+    color: rgb(128, 128, 128);
+    font-weight: bold;
+}
 
 
-/* EDIT VIEW */
+/* DICTIONARY VIEW */
 .gradient {
     background: linear-gradient(to left, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) !important;
     height: 50px;
@@ -56,16 +74,21 @@ ion-content {
 
 .btnTxt {
     font-size: 17px !important;
-    padding: 17px 4px 0px 0px !important;
+    padding: 15px 0px 0px 0px !important;
     height: 69px;
     border: solid rgba(0, 0, 0, 0.7) !important;
     border-width: 1px 1px 1px 0px !important;
 }
 
 .inputTxt {
-    font-size: 19px !important;
+    font-size: 16px !important;
+    padding: 0px !important;
 }
 
+.navBtn {
+    background: rgba(169, 169, 169, 0.5) !important;
+    font-weight: bold !important;
+}
 
 
 
@@ -74,6 +97,19 @@ ion-content {
     height: 10px;
     margin-bottom: 10px;
 }
+
+.cardBtnTxt {
+    padding-top: 4px;
+}
+
+.green {
+    background-color: rgba(102, 204, 51, 0.7);
+}
+
+.blue {
+    background-color: rgba(74, 135, 238, 0.9);
+}
+
 
 
 
@@ -98,13 +134,7 @@ ion-content {
     float: left;
 }
 
-.green {
-    background-color: green;
-}
 
-.blue {
-    background-color: blue;
-}
 
 
 
@@ -133,6 +163,18 @@ ion-content {
     min-width: 50px;
     margin: 0px 15px 0px 15px;
 }
+
+.settingsBtn {
+    width: 60px;
+}
+
+.settingsBtnTxt {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px;
+}
+
 
 
 /* OVERRIDE */
