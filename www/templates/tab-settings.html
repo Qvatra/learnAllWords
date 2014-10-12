@@ -1,57 +1,66 @@
 <ion-view title="Settings">
-  <ion-content class="padding">
+    <ion-content class="padding">
+        <h3>Learning order:</h3>
+        <ul>
+            <li class="item item-checkbox settingsItem">
+                <label class="checkbox">
+                    <input type="radio" name="group" ng-model="settings.direction" value="direct" ng-click="directionClick('direct')">
+                </label>
+                <strong>Word <i class="ion-arrow-right-c"></i> Translation</strong>
+            </li>
+            <li class="item item-checkbox settingsItem">
+                <label class="checkbox">
+                    <input type="radio" name="group" ng-model="settings.direction" value="reverse" ng-click="directionClick('reverse')">
+                </label>
+                <strong>Translation <i class="ion-arrow-right-c"></i> Word</strong>
+            </li>
+            <li class="item item-checkbox settingsItem">
+                <label class="checkbox">
+                    <input type="radio" name="group" ng-model="settings.direction" value="both" ng-click="directionClick('both')">
+                </label>
+                <strong>W <i class="ion-arrow-right-c"></i> T</strong> and <strong>T <i class="ion-arrow-right-c"></i> W</strong>
+            </li>
+        </ul>
 
-      <h3 class="myItem">Learning order:</h3>
-      <ul class="list">
-          <li class="item item-checkbox">
-              <label class="checkbox">
-                  <input type="radio" name="group" ng-model="settings.direction" value="direct" ng-click="directionClick('direct')">
-              </label>
-              <strong>Word <i class="ion-arrow-right-c"></i> Translation</strong>
-          </li>
-          <li class="item item-checkbox">
-              <label class="checkbox">
-                  <input type="radio" name="group" ng-model="settings.direction" value="reverse" ng-click="directionClick('reverse')">
-              </label>
-              <strong>Translation <i class="ion-arrow-right-c"></i> Word</strong>
-          </li>
-          <li class="item item-checkbox">
-              <label class="checkbox">
-                  <input type="radio" name="group" ng-model="settings.direction" value="both" ng-click="directionClick('both')">
-              </label>
-              <strong>Word <i class="ion-arrow-right-c"></i> Translation</strong> and <strong>Translation <i class="ion-arrow-right-c"></i> Word</strong>
-          </li>
-      </ul>
+        <h3>Card frequency:<button class="button button-assertive button-small floatR" ng-click="resetWeights()">Reset</button></h3>
+        <div class="settingsItem">
+            <div class="item-input-inset" style="padding: 10px 8px 10px 16px;">
+                <div class="itemContent"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><strong style="margin-left: 14px;">weight:</strong></div>
+                <label class="item-input-wrapper inputWeight">
+                    <input type="number" ng-model="settings.w1">
+                </label>
+                <div>({{f1}}%)</div>
+            </div>
+        </div>
+        <div class="settingsItem">
+            <div class="item-input-inset" style="padding: 10px 8px 10px 16px;">
+                <div class="itemContent"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><strong style="margin-left: 14px;">weight:</strong></div>
+                <label class="item-input-wrapper inputWeight">
+                    <input type="number" ng-model="settings.w2">
+                </label>
+                <div>({{f2}}%)</div>
+            </div>
+        </div>
+        <div class="settingsItem">
+            <div class="item-input-inset" style="padding: 10px 8px 10px 16px;">
+                <div class="itemContent"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><strong style="margin-left: 14px;">weight:</strong></div>
+                <label class="item-input-wrapper inputWeight">
+                    <input type="number" ng-model="settings.w3">
+                </label>
+                <div>({{f3}}%)</div>
+            </div>
+        </div>
+        <div class="settingsItem">
+            <div class="item-input-inset" style="padding: 10px 8px 10px 16px;">
+                <div class="itemContent"><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><strong style="margin-left: 14px;">weight:</strong></div>
+                <label class="item-input-wrapper inputWeight">
+                    <input type="number" ng-model="settings.w4">
+                </label>
+                <div>({{f4}}%)</div>
+            </div>
+        </div>
 
-      <h3 class="myItem">Card frequency:&nbsp;&nbsp;&nbsp;&nbsp;<button class="button button-assertive button-small floatR btnWidth" ng-click="resetWeights()">Reset</button></h3>
-      <div class="list">
-          <label class="item item-input">
-              <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i></span>
-              <strong>&nbsp; card weight:</strong>
-              <input class="inputSettings" type="number" name="input" ng-model="settings.w1" min="0" max="99" required>
-              <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f1}}&nbsp;%</span>
-          </label>
-          <label class="item item-input">
-              <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i></span>
-              <strong>&nbsp; card weight:</strong>
-              <input class="inputSettings" type="number" name="input" ng-model="settings.w2" min="0" max="99" required>
-              <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f2}}&nbsp;%</span>
-          </label>
-          <label class="item item-input">
-              <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i></span>
-              <strong>&nbsp; card weight:</strong>
-              <input class="inputSettings" type="number" name="input" ng-model="settings.w3" min="0" max="99" required>
-              <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f3}}&nbsp;%</span>
-          </label>
-          <label class="item item-input">
-              <span class="input-label inputLabel"><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i></span>
-              <strong>&nbsp; card weight:</strong>
-              <input class="inputSettings" type="number" name="input" ng-model="settings.w4" min="0" max="99" required>
-              <span class="input-label inputLabel"><i class="ion-arrow-right-c"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{f4}}&nbsp;%</span>
-          </label>
-      </div>
+        <h3>Progress: {{progress}}&nbsp;%&nbsp;&nbsp;<button class="button button-assertive button-small floatR btnWidth" ng-click="resetProgress();">Reset</button></h3>
 
-      <h3 class="myItem">Progress: {{progress.toPrecision(3)}}&nbsp;%&nbsp;&nbsp;<button class="button button-assertive button-small floatR btnWidth" ng-click="resetProgress();">Reset</button></h3>
-
-  </ion-content>
+    </ion-content>
 </ion-view>

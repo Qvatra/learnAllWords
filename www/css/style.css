@@ -10,6 +10,11 @@ ion-content {
     padding-top: 5px;
 }
 
+.importIcon {
+    font-size: 35px;
+    margin: 0px 26px 0px 0px;
+    color: rgba(47, 79, 79, 0.7);
+}
 
 
 /* DASH VIEW */
@@ -32,30 +37,34 @@ ion-content {
 
 .editList {
     position: relative;
-    margin: 1px 0px 0px 0px;
 }
 
 .editItem {
-    margin: 0px 1px 0px 1px;
+    margin: 0px;
     background-color: rgba(255, 255, 255, 0.5);
     padding-right: 60px;
+    border: solid rgba(0, 0, 0, 0.7);
+    border-width: 1px 0px 0px 0px;
 }
 
 
 .btnBar {
-   background-color: rgb(39, 57, 57);
-   bottom: 75px !important;
+    background-color: rgb(39, 57, 57);
+    bottom: 75px !important;
 }
 
 
 .btnTxt {
-font-size: 17px !important;
-padding: 20px 0px 0px 0px !important;
-height: 69px;
-border: solid rgba(0, 0, 0, 0.7) !important;
-border-width: 2px !important;
+    font-size: 17px !important;
+    padding: 17px 4px 0px 0px !important;
+    height: 69px;
+    border: solid rgba(0, 0, 0, 0.7) !important;
+    border-width: 1px 1px 1px 0px !important;
 }
 
+.inputTxt {
+    font-size: 19px !important;
+}
 
 
 
@@ -70,7 +79,7 @@ border-width: 2px !important;
 
 /* COMMON */
 .noPadding {
-    padding:0px;
+    padding: 0px;
 }
 
 .cursive {
@@ -95,4 +104,39 @@ border-width: 2px !important;
 
 .blue {
     background-color: blue;
+}
+
+
+
+/* SETTINGS VIEW */
+.settingsItem {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: solid rgba(0, 0, 0, 0.7);
+    border-width: 1px 0px 0px 0px;
+}
+
+.myInputLabel {
+    min-width: 164px;
+}
+
+.inputSettings {
+    max-width: 60px;
+}
+
+.itemContent {
+    font-size: 17px;
+    color: rgb(68, 68, 68);
+}
+
+.inputWeight {
+    max-width: 50px;
+    min-width: 50px;
+    margin: 0px 15px 0px 15px;
+}
+
+
+/* OVERRIDE */
+.bar.bar-stable .title {
+    color: rgba(47, 79, 79, 0.7);
+    font-size: 25px !important;
 }

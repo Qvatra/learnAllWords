@@ -20,3 +20,11 @@ platforms/android/assets/www/js/editController.js
 platforms/android/assets/www/templates/tab-card.html
 platforms/android/assets/www/templates/tab-dash.html
 platforms/android/assets/www/templates/tabs.html
+platforms/android/ant-build/learnWords-release-unsigned.apk
+platforms/android/ant-build/learnWords-release-unsigned.apk.d
+platforms/android/CordovaLib/ant-build/classes.jar
+platforms/android/CordovaLib/ant-build/classes/org/apache/cordova/BuildConfig.class
+platforms/android/ant-build/classes.dex
+platforms/android/ant-build/classes/com/ionicframework/learnwords854517/BuildConfig.class
+platforms/android/ant-build/dexedLibs/classes-a11a7c690cbbe4a196663a1069b359de.jar
+platforms/android/assets/www/templates/tab-edit.html

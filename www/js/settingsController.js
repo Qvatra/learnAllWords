@@ -4,6 +4,7 @@
     console.log('settingsController');
     var vm = $scope;
 
+    vm.progress;
     vm.settings;
     vm.f1;
     vm.f2;
@@ -22,6 +23,7 @@
     if (!$rootScope.settings) ioService.initialize(); //dictionary, settings
     vm.settings = $rootScope.settings;
     vm.calculateFrequency();
+    vm.progress = cardService.calculateProgress(vm.settings.direction);
     
 
 
@@ -37,6 +39,7 @@
 
     vm.resetProgress = function () {
         cardService.resetProgress();
+        vm.progress = cardService.calculateProgress(vm.settings.direction);
         ioService.saveDictionary($rootScope.dictionary);
     }
 

@@ -1,15 +1,19 @@
+<ion-nav-buttons side="right">
+    <a class="ion-archive importIcon" ng-click="import()"></a>
+</ion-nav-buttons>
+
 <ion-view title="Dictionary">
     <ion-content class="padding">
 
         <div class="editList" ng-repeat="item in array track by $index">
             <div class="item-button-right editItem">
-                <div class="item-input-inset">
+                <div class="item-input-inset" style="padding: 11px 8px 10px 10px;">
                     <label class="item-input-wrapper">
-                        <input type="text" ng-model="item.w" placeholder="Word">
+                        <input type="text" ng-model="item.w" placeholder="Word" class="inputTxt">
                     </label>
-                    <div style="width: 18px;"></div>
+                    <div style="width: 12px;"></div>
                     <label class="item-input-wrapper">
-                        <input type="text" ng-model="item.t" placeholder="Translation">
+                        <input type="text" ng-model="item.t" placeholder="Translation" class="inputTxt">
                     </label>
                 </div>
                 <button class="button button-assertive ion-minus-round" ng-click="deleteItem($index)"></button>
@@ -17,8 +21,8 @@
         </div>
 
         <div class="item item-button-right editItem gradient">
-            <div style="text-align: center;">Add new item</div>
-            <button class="button button-balanced ion-plus-round" ng-click="addItem()"></button>
+            <div class="inputTxt" style="text-align: center;">Add new item</div>
+            <button class="button button-stable ion-plus-round" ng-click="addItem()"></button>
         </div>
 
     </ion-content>
@@ -26,10 +30,9 @@
 
 <ion-footer-bar align-title="left" class="noPadding btnBar">
     <div class="button-bar">
-        <a class="button button-balanced btnTxt" ng-click="save()">Save</a>
-        <a class="button button-positive btnTxt" ng-click="cancel()">Cancel</a>
-        <a class="button button-energized btnTxt" ng-click="import()">Import</a>
-        <a class="button button-balanced btnTxt" ng-click="addItem()">Add</a>
-        <a class="button button-assertive btnTxt" ng-click="deleteAll()">Delete all</a>
+        <a class="button button-balanced btnTxt" ng-click="save()"><h4>Save</h4></a>
+        <a class="button button-positive btnTxt" ng-click="cancel()"><h4>Cancel</h4></a>
+        <a class="button button-stable btnTxt" ng-click="addItem()"><h4>Add</h4></a>
+        <a class="button button-assertive btnTxt" ng-click="deleteAll()"><h4>Delete all</h4></a>
     </div>
 </ion-footer-bar>
