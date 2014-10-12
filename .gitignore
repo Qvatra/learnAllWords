@@ -2,5 +2,6 @@ platforms
 plugins
 hooks
 scss
+www/lib
 /gulpfile.js
 /ionic.project

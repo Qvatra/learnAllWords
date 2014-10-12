@@ -115,7 +115,11 @@
     }
 
 
-    vm.card = vm.nextCard();
-    vm.mode = 'question';
+    if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) {
+        $state.go('tab.dash', {});
+    } else {
+        vm.card = vm.nextCard();
+        vm.mode = 'question';
+    }
 
 }])

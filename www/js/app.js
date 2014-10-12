@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'ioService' is found in ioService.js
 // 'controllers' is found in controllers.js
-angular.module('app', ['ionic', 'controllers', 'services'])
+angular.module('app', ['ionic', 'controllers', 'services', 'ngCordova'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -19,6 +19,12 @@ angular.module('app', ['ionic', 'controllers', 'services'])
             StatusBar.styleDefault();
         }
     });
+
+    //document.addEventListener("deviceready", onDeviceReady, false);
+    //function onDeviceReady() {
+    //    alert('1');
+    //    window.webkitRequestFileSystem(LocalFileSystem.PERSISTENT, 0, success, fail);
+    //}
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -76,6 +82,16 @@ angular.module('app', ['ionic', 'controllers', 'services'])
                 controller: 'EditCtrl'
             }
         }
+    })
+
+    .state('tab.explorer', {
+        url: '/explorer',
+        views: {
+            'tab-edit': {
+                templateUrl: 'templates/edit-explorer.html',
+                controller: 'ExplorerCtrl'
+            }
+        }
     });
 
     // if none of the above states are matched, use this as the fallback
@@ -87,3 +103,5 @@ angular.module('app', ['ionic', 'controllers', 'services'])
 //initializing modules
 angular.module('controllers', []);
 angular.module('services', []);
+
+

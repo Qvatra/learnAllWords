@@ -1,0 +1,17 @@
+<ion-view title="File explorer">
+    <ion-content class="padding">
+
+        Explorer
+
+        <div ng-repeat="item in array | filter: item.isDirectory: true | orderBy: 'name'">
+            <i ng-show="item.isDirectory == true" class="icon ion-folder expFont">{{item.name}}</i>
+        </div>
+
+        <div ng-repeat="item in array | filter: item.isFile: true | orderBy: 'name'">
+            <i ng-show="item.isFile == true" class="expFont">{{item.name}}</i>
+        </div>
+
+
+
+</ion-content>
+</ion-view>

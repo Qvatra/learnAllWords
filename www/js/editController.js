@@ -40,7 +40,7 @@
 
 
     vm.export = function () {
-
+        $state.go('tab.explorer', {});
     }
 
 

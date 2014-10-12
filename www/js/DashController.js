@@ -7,12 +7,12 @@
     if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
 
     vm.start = function () {
-        if ($rootScope.dictionary.length != 0) {
-            $state.go('tab.card', {});
-        } else {
+        if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) {
             $ionicPopup.alert({ title: 'First you need to load or create a dictionary!' }).then(function () {
                 $state.go('tab.edit', {});
             });
+        } else {
+            $state.go('tab.card', {});
         }
     }
 

@@ -177,6 +177,14 @@ ion-content {
 
 
 
+/* EXPLORER */
+.expFont {
+    font-size: 30px;
+}
+
+
+
+
 /* OVERRIDE */
 .bar.bar-stable .title {
     color: rgba(47, 79, 79, 0.7);
