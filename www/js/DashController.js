@@ -48,7 +48,7 @@
     }
 
     vm.about = function () {
-        $ionicPopup.alert({ title: 'Learn Cards App, 2014', template: 'created by Oleksandr Zinchenko<br />e-mail: mail2zin@gmail.com' });
+        $ionicPopup.alert({ title: 'Learn Cards App, 2014', template: 'created by Oleksandr Zinchenko<br /><img src="../img/autor.jpg" style="width:60px;" /><br />e-mail: mail2zin@gmail.com' });
     }
 
     vm.calculateProgresses();

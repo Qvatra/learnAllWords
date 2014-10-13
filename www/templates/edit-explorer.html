@@ -1,17 +1,43 @@
-<ion-view title="File explorer">
+<ion-view title={{currentUrl}}>
     <ion-content class="padding">
 
-        Explorer
-
-        <div ng-repeat="item in array | filter: item.isDirectory: true | orderBy: 'name'">
-            <i ng-show="item.isDirectory == true" class="icon ion-folder expFont">{{item.name}}</i>
+        <div class="item itemStyle" ng-click="goBack()">
+            <div class="expFile" style="margin-left: 3px;"><strong>.. /</strong></div>
         </div>
 
-        <div ng-repeat="item in array | filter: item.isFile: true | orderBy: 'name'">
-            <i ng-show="item.isFile == true" class="expFont">{{item.name}}</i>
-        </div>
+        <ul ng-repeat="item in (array | filter: {isDirectory: true} | orderBy: 'name')">
+            <li class="item itemStyle" ng-click="folderClick(item.url)">
+                <i class="icon ion-folder expIcon"></i>
+                <div class="expDir">{{item.name}}</div>
+            </li>
+        </ul>
 
+        <ul ng-repeat="item in (array | filter: {isFile: true} | orderBy: 'name')">
+            <li class="item itemStyle" ng-click="fileClick(item.url)">
+                <div class="expFile">{{item.name}}</div>
+            </li>
+        </ul>
 
-
-</ion-content>
+    </ion-content>
 </ion-view>
+
+<ion-footer-bar align-title="left" class="expFooter noPadding">
+    <div class="row noPadding">
+        <div class="col col-50">
+            <label class="item-input-wrapper">
+                <input type="text" ng-model="item.t" placeholder="Translation" class="inputTxt">
+            </label>
+        </div>
+        <div class="col col-50">
+            <a class="button button-balanced floatL halfW" ng-click="save()"><h4 class="expBtnTxt">Save</h4></a>
+            <a class="button button-stable floatR halfW" ng-click="cancel()"><h4 class="expBtnTxt">Cancel</h4></a>
+        </div>
+    </div>
+
+    <!--<div class="item-button-right">
+
+    </div>
+    <div class="button-bar">
+
+    </div>-->
+</ion-footer-bar>

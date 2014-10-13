@@ -178,11 +178,43 @@ ion-content {
 
 
 /* EXPLORER */
-.expFont {
-    font-size: 30px;
+.expDir {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    margin: -29px 0px 0px 45px;
 }
 
+.expFile {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    margin: 10px 0px 0px 45px;
+}
 
+.expIcon {
+    font-size: 40px;
+    color: yellow;
+    margin-right: 5px;
+}
+
+.itemStyle {
+    background: black;
+    height: 50px;
+    padding: 5px 0px 0px 15px;
+}
+
+.expFooter {
+    background: black;
+}
+
+.halfW {
+    width: 50%;
+    height: 35px;
+    margin: 0px 0px 0px -5px;
+}
+
+.expBtnTxt {
+    margin-top: 7px;
+}
 
 
 /* OVERRIDE */

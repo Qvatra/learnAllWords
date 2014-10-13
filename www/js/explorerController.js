@@ -2,53 +2,53 @@
 
 angular.module('controllers')
 
-.controller('ExplorerCtrl', ['$scope', '$rootScope', '$cordovaFile', '$q', '$state', function ($scope, $rootScope, $cordovaFile, $q, $state) {
+.controller('ExplorerCtrl', ['$scope', '$rootScope', '$cordovaFile', '$q', '$state', 'explorerService', function ($scope, $rootScope, $cordovaFile, $q, $state, explorerService) {
     console.log('ExplorerCtrl');
     var vm = $scope;
 
     vm.array;
+    vm.currentUrl = 'cur url';
 
     if (!$rootScope.dictionary) $state.go('tab.dash', {});
 
-    vm.locateRootDir = function (namespace) {
-        var deferred = $q.defer();
 
-        $cordovaFile.checkDir(namespace).then(function (res) {
-            deferred.resolve(res);
-        }, function () {
-            console.log('no dir found. Creating one');
-            $cordovaFile.createDir(namespace).then(function (res) {
-                deferred.resolve(res);
-            }, function (err) {
-                deferred.reject(err);
-            });
+
+    if (ionic.Platform.isWebView()) {
+        explorerService.getList('com.learn.cards').then(function (list) {
+            console.log(list);
+            vm.array = list;
         });
-
-        return deferred.promise;
+    } else {
+        vm.array = [
+            { name: 'file1', isFile: true, isDirectory: false },
+            { name: 'file2', isFile: true, isDirectory: false },
+            { name: 'Directory1', isFile: false, isDirectory: true },
+            { name: 'Directory2', isFile: false, isDirectory: true },
+            { name: 'file3', isFile: true, isDirectory: false },
+            { name: 'Directory3', isFile: false, isDirectory: true }
+        ];
     }
 
 
-    vm.getList = function (namespace) {
-        var deferred = $q.defer();
-
-        vm.locateRootDir(namespace).then(function () {
-            $cordovaFile.listDir(namespace).then(function (list) {
-                deferred.resolve(list);
-            }, function (err) {
-                deferred.reject(err);
-            });
-        }, function (err) {
-            deferred.reject(err);
-        });
-
-        return deferred.promise;
+    vm.folderClick = function (url) {
+        console.log(url);
     }
 
 
-    vm.getList('com.learn.cards').then(function (list) {
-        console.log(list);
-        vm.array = list;
-    });
+    vm.fileClick = function (url) {
+        console.log(url);
+    }
 
+    vm.save = function () {
+        console.log('save');
+    }
+
+    vm.cancel = function () {
+        console.log('cancel');
+    }
+
+    vm.goBack = function () {
+
+    }
 
 }])
