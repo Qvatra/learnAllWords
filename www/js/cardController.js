@@ -98,7 +98,7 @@
         if (vm.progress == 100) {
             if ($rootScope.settings.direction == 'both') {
                 if (!$rootScope.winFlag) {
-                    $ionicPopup.alert({ title: '<h3>Congratulations!</h3><img src="../img/win.png" class="imgWin" /><br /><h5>You have learned all the words in this vocabulary!<br />Here is your diploma!</h5><br /><h6>You can start all over again by resetting <strong>progress</strong> in the settings section.</h6>' });
+                    $ionicPopup.alert({ title: '<h3>Congratulations!</h3><img src="img/win.png" class="imgWin" /><br /><h5>You have learned all the words in this vocabulary!<br />Here is your diploma!</h5><br /><h6>You can start all over again by resetting <strong>progress</strong> in the settings section.</h6>' });
                     $rootScope.winFlag = true;
                 }
             } else {
