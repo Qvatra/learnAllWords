@@ -1,20 +1,21 @@
 <ion-view title={{currentUrl}}>
-    <ion-content class="padding">
+    <ion-content style="padding: 1px;">
 
         <div class="item itemStyle" ng-click="goBack()">
-            <div class="expFile" style="margin-left: 3px;"><strong>.. /</strong></div>
+            <div class="expBackTxt"><strong>.. /</strong></div>
         </div>
 
         <ul ng-repeat="item in (array | filter: {isDirectory: true} | orderBy: 'name')">
-            <li class="item itemStyle" ng-click="folderClick(item.url)">
-                <i class="icon ion-folder expIcon"></i>
-                <div class="expDir">{{item.name}}</div>
+            <li class="item itemStyle" ng-click="folderClick(item.fullPath)">
+                <i class="icon ion-folder expFolderIco"></i>
+                <div class="expItemTxt">{{item.name}}</div>
             </li>
         </ul>
 
         <ul ng-repeat="item in (array | filter: {isFile: true} | orderBy: 'name')">
-            <li class="item itemStyle" ng-click="fileClick(item.url)">
-                <div class="expFile">{{item.name}}</div>
+            <li class="item itemStyle" ng-click="fileClick(item.name)">
+                <i class="icon ion-document expFileIco"></i>
+                <div class="expItemTxt">{{item.name}}</div>
             </li>
         </ul>
 
@@ -24,20 +25,15 @@
 <ion-footer-bar align-title="left" class="expFooter noPadding">
     <div class="row noPadding">
         <div class="col col-50">
-            <label class="item-input-wrapper">
-                <input type="text" ng-model="item.t" placeholder="Translation" class="inputTxt">
+            <label class="item-input-wrapper" style="margin-top: 3px;">
+                <input type="text" ng-model="fileName">
             </label>
         </div>
         <div class="col col-50">
-            <a class="button button-balanced floatL halfW" ng-click="save()"><h4 class="expBtnTxt">Save</h4></a>
+            <a ng-show="mode == 'export'" class="button button-balanced floatL halfW" ng-click="save()"><h4 class="expBtnTxt">Save</h4></a>
+            <a ng-show="mode == 'import'" class="button button-balanced floatL halfW" ng-click="load()"><h4 class="expBtnTxt">Open</h4></a>
             <a class="button button-stable floatR halfW" ng-click="cancel()"><h4 class="expBtnTxt">Cancel</h4></a>
         </div>
     </div>
 
-    <!--<div class="item-button-right">
-
-    </div>
-    <div class="button-bar">
-
-    </div>-->
 </ion-footer-bar>

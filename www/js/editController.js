@@ -26,21 +26,11 @@
 
 
     vm.import = function () {
-        var filename = 'dutch.js';
-        $ionicPopup.confirm({ title: 'Are you sure?', template: 'You are about to download ' + filename + ' dictionary. Current dictionary data will be lost.', cancelType: 'button-positive', okType: 'button-balanced' })
-            .then(function (ok) {
-                if (ok) {
-                    ioService.importDictioinary('/' + filename).then(function (result) {
-                        vm.array = result;
-                        $rootScope.dictionary = vm.array;
-                    });
-                }
-            });
+        $state.go('tab.explorer', { mode: 'import' });
     }
 
-
     vm.export = function () {
-        $state.go('tab.explorer', {});
+        $state.go('tab.explorer', {mode: 'export'});
     }
 
 

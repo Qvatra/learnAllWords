@@ -85,7 +85,7 @@ angular.module('app', ['ionic', 'controllers', 'services', 'ngCordova'])
     })
 
     .state('tab.explorer', {
-        url: '/explorer',
+        url: '/explorer?mode',
         views: {
             'tab-edit': {
                 templateUrl: 'templates/edit-explorer.html',
