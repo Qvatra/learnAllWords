@@ -3,7 +3,7 @@
 angular.module('controllers')
 
 .controller('ExplorerCtrl', ['$scope', '$rootScope', '$cordovaFile', '$q', '$state', 'explorerService', 'ioService', '$ionicPopup', function ($scope, $rootScope, $cordovaFile, $q, $state, explorerService, ioService, $ionicPopup) {
-    console.log('ExplorerCtrl');
+    //console.log('ExplorerCtrl');
     var vm = $scope;
 
     vm.fileName = '';
@@ -11,20 +11,20 @@ angular.module('controllers')
     vm.currentUrl = '../com.learn.cards';
     vm.mode = $state.params.mode;
 
-    console.log($state.params.mode);
+    //console.log($state.params.mode);
 
     if (!$rootScope.dictionary) $state.go('tab.dash', {});
     explorerService.getList(vm.currentUrl.substr(3)).then(function (list) {
-        console.log(list);
+        //console.log(list);
         vm.array = list;
     });
 
 
 
     vm.folderClick = function (url) {
-        console.log(url);
+        //console.log(url);
         explorerService.getList(url.substr(1)).then(function (list) {
-            console.log(list);
+            //console.log(list);
             vm.array = list;
             vm.currentUrl = '..' + url;
             vm.fileName = '';
@@ -32,14 +32,14 @@ angular.module('controllers')
     }
 
     vm.fileClick = function (name) {
-        console.log(name);
+        //console.log(name);
         vm.fileName = name;
     }
 
     vm.goBack = function () {
         var url = vm.currentUrl.substr(3, vm.currentUrl.lastIndexOf('/') - 3);
         explorerService.getList(url).then(function (list) {
-            console.log(list);
+            //console.log(list);
             vm.array = list;
             vm.currentUrl = '../' + url;
             vm.fileName = '';
@@ -49,7 +49,7 @@ angular.module('controllers')
 
 
     vm.save = function () {
-        console.log('save');
+        //console.log('save');
 
         if (vm.fileName || vm.fileName.trim() != '') {
             var dictionary = $rootScope.dictionary.map(function (item) { //\r\n
@@ -66,7 +66,7 @@ angular.module('controllers')
             $cordovaFile.writeFile(url + vm.fileName, dic2save).then(function () {
                 $state.go('tab.edit', {});
             }, function () {
-                alert('error: file not saved');
+                $ionicPopup.alert({ title: 'Error', template: 'File not saved' });
             });
         } else {
             $ionicPopup.alert({ title: 'Export', template: 'Please enter a file name.' });
@@ -107,7 +107,7 @@ angular.module('controllers')
 
 
     vm.cancel = function () {
-        console.log('cancel');
+        //console.log('cancel');
         $state.go('tab.edit', {});
     }
 

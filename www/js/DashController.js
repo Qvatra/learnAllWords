@@ -1,14 +1,17 @@
 ﻿angular.module('controllers')
 
 .controller('DashCtrl', ['$scope', '$rootScope', 'ioService', 'cardService', '$ionicPopup', '$state', function ($scope, $rootScope, ioService, cardService, $ionicPopup, $state) {
-    console.log('DashCtrl');
+    //console.log('DashCtrl');
     var vm = $scope;
+
+    $rootScope.winFlag = false; //for card graduation msg
+    $rootScope.almostWinFlag = false; //for card graduation msg
 
     if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
 
     vm.start = function () {
         if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) {
-            $ionicPopup.alert({ title: 'First you need to load or create a dictionary!' }).then(function () {
+            $ionicPopup.alert({ title: '<h4>Your dictionary is empty!</h4><img src="../img/book.png" class="imgBook" /><br /><h5>You need to load or create a dictionary!</h5>' }).then(function () {
                 $state.go('tab.edit', {});
             });
         } else {
@@ -48,7 +51,7 @@
     }
 
     vm.about = function () {
-        $ionicPopup.alert({ title: 'Learn Cards App, 2014', template: 'created by Oleksandr Zinchenko<br /><img src="../img/autor.jpg" style="width:60px;" /><br />e-mail: mail2zin@gmail.com' });
+        $ionicPopup.alert({ title: 'Learn Cards App, 2014', template: '<img src="../img/autor.jpg" class="imgAuthor"><span>Created by<br>Oleksandr Zinchenko<br>e-mail:<br>mail2zin@gmail.com </span>' });
     }
 
     vm.calculateProgresses();

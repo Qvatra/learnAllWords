@@ -1,7 +1,7 @@
 ﻿angular.module('controllers')
 
 .controller('EditCtrl', ['$scope', '$rootScope', 'ioService', '$q', '$ionicPopup', '$ionicScrollDelegate', '$state', function ($scope, $rootScope, ioService, $q, $ionicPopup, $ionicScrollDelegate, $state) {
-    console.log('EditCtrl');
+    //console.log('EditCtrl');
     var vm = $scope;
 
     if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
@@ -9,7 +9,7 @@
 
 
     $scope.$on("$destroy", function () {
-        console.log('edit destroy');
+        //console.log('edit destroy');
     });
 
 

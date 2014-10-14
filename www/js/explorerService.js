@@ -1,5 +1,5 @@
 ﻿angular.module('services').service('explorerService', ['$rootScope', '$q', '$timeout', '$cordovaFile', function ($rootScope, $q, $timeout, $cordovaFile) {
-    console.log('explorerService');
+    //console.log('explorerService');
     var vm = this;
 
     vm.array4browser = [
@@ -17,7 +17,7 @@
         $cordovaFile.checkDir(namespace).then(function (res) {
             deferred.resolve(res);
         }, function () {
-            console.log('no dir found. Creating one');
+            //console.log('no dir found. Creating one');
             $cordovaFile.createDir(namespace).then(function (res) {
                 deferred.resolve(res);
             }, function (err) {

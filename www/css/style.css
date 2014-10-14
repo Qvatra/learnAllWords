@@ -43,6 +43,16 @@ ion-content {
     font-weight: bold;
 }
 
+.imgBook {
+    width: 120px;
+}
+
+.imgAuthor {
+    width: 80px;
+    float: left;
+    margin-right: 10px;
+}
+
 
 /* DICTIONARY VIEW */
 .gradient {
@@ -60,11 +70,14 @@ ion-content {
 .editItem {
     margin: 0px;
     background-color: rgba(255, 255, 255, 0.5);
-    padding-right: 60px;
+    padding-right: 53px;
     border: solid rgba(0, 0, 0, 0.7);
     border-width: 1px 0px 0px 0px;
 }
 
+.itemBtn {
+    margin: 1px -5px 0px 0px;
+}
 
 .btnBar {
     background-color: rgb(39, 57, 57);
@@ -92,6 +105,8 @@ ion-content {
 
 
 
+
+
 /* CARD VIEW */
 .progressBar {
     height: 10px;
@@ -110,6 +125,13 @@ ion-content {
     background-color: rgba(74, 135, 238, 0.9);
 }
 
+.imgWin {
+    width: 170px;
+}
+
+.cardHeight {
+    height: 55px;
+}
 
 
 
@@ -170,7 +192,7 @@ ion-content {
 
 .settingsBtnTxt {
     color: rgba(0, 0, 0, 0.7);
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bold;
     margin: 0px;
 }
@@ -215,7 +237,8 @@ ion-content {
 }
 
 .expBtnTxt {
-    margin-top: 7px;
+    margin-top: 10px;
+    font-size: 15px;
 }
 
 .expBackTxt {
@@ -230,9 +253,13 @@ ion-content {
 /* OVERRIDE */
 .bar.bar-stable .title {
     color: rgba(47, 79, 79, 0.7);
-    font-size: 25px !important;
+    font-size: 18px !important;
 }
 
 .item.active, .item.activated {
     background-color: rgba(0, 112, 255, 0.2);
+}
+
+.scroll-bar-v {
+    display: none;
 }

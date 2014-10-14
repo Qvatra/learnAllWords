@@ -1,7 +1,7 @@
 ﻿angular.module('controllers')
 
 .controller('CardCtrl', ['$scope', '$rootScope', 'ioService', 'cardService', '$ionicPopup', '$state', function ($scope, $rootScope, ioService, cardService, $ionicPopup, $state) {
-    console.log('CardCtrl');
+    //console.log('CardCtrl');
     var vm = $scope;
 
     vm.card;
@@ -11,7 +11,7 @@
     vm.colorProgress;
     vm.progressBarStyle;
 
-    if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
+    if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) ioService.initialize(); //dictionary, settings
 
     vm.detectDirection = function () {
         if ($rootScope.settings.direction == 'direct') {
@@ -32,7 +32,7 @@
         else if (r <= $rootScope.settings.w1 + $rootScope.settings.w2 + $rootScope.settings.w3) w = 2;
         else w = 1;
 
-        console.log('r=' + r + ' w=' + w);
+        //console.log('r=' + r + ' w=' + w);
 
         vm.detectDirection();
 
@@ -45,11 +45,11 @@
             vm.colorProgress = { color: cardService.calculateColor($rootScope.settings.direction), fontFamily: 'cursive' };
             vm.progressBarStyle = { background: cardService.calculateColor($rootScope.settings.direction), width: vm.progress + '%' };
 
-            console.log('printing array --------------------------------');
-            console.log('random = ' + r + '%, weight = ' + w + ', dir: ' + item.dir);
-            $rootScope.dictionary.forEach(function (item) {
-                console.log('w: ' + item.w + ', t: ' + item.t + ', d: ' + item.d + ', r: ' + item.r);
-            });
+            //console.log('printing array --------------------------------');
+            //console.log('random = ' + r + '%, weight = ' + w + ', dir: ' + item.dir);
+            //$rootScope.dictionary.forEach(function (item) {
+            //    console.log('w: ' + item.w + ', t: ' + item.t + ', d: ' + item.d + ', r: ' + item.r);
+            //});
             return item;
         }
     }
@@ -92,7 +92,22 @@
     vm.correct = function () {
         vm.mode = 'question';
         vm.setWeightForCurrent(1);
+
         vm.card = vm.nextCard();
+
+        if (vm.progress == 100) {
+            if ($rootScope.settings.direction == 'both') {
+                if (!$rootScope.winFlag) {
+                    $ionicPopup.alert({ title: '<h3>Congratulations!</h3><img src="../img/win.png" class="imgWin" /><br /><h5>You have learned all the words in this vocabulary!<br />Here is your diploma!</h5><br /><h6>You can start all over again by resetting <strong>progress</strong> in the settings section.</h6>' });
+                    $rootScope.winFlag = true;
+                }
+            } else {
+                if (!$rootScope.almostWinFlag) {
+                    $ionicPopup.alert({ title: '<h3>Congratulations!</h3><h5>You are almost finished your education!<br /><br />To be able to graduate you need to change mode of the app to<br /><strong>W->T or T->W</strong>.</h5>' });
+                    $rootScope.almostWinFlag = true;
+                }
+            }
+        }
     }
 
     vm.wrong = function () {

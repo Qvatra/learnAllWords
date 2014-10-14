@@ -1,7 +1,7 @@
 ﻿angular.module('controllers')
 
 .controller('SettingsCtrl', ['$scope', '$rootScope', '$state', 'ioService', 'cardService', '$ionicPopup', function ($scope, $rootScope, $state, ioService, cardService, $ionicPopup) {
-    console.log('settingsController');
+    //console.log('settingsController');
     var vm = $scope;
 
     vm.progress;
@@ -22,6 +22,9 @@
 
     if (!$rootScope.settings) ioService.initialize(); //dictionary, settings
     vm.settings = JSON.parse(JSON.stringify($rootScope.settings)); //pass-by-value
+    vm.settings = ioService.parseFloatSettings(vm.settings);
+
+
     vm.calculateFrequency();
     vm.progress = cardService.calculateProgress(vm.settings.direction);
 

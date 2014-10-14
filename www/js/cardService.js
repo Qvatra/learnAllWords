@@ -1,5 +1,5 @@
 ﻿angular.module('services').service('cardService', ['$rootScope', '$q', '$http', '$timeout', function ($rootScope, $q, $http, $timeout) {
-    console.log('cardService');
+    //console.log('cardService');
     var vm = this;
 
     vm.calculateProgress = function (direction) {
