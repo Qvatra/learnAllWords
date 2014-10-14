@@ -38,7 +38,7 @@ ion-content {
 }
 
 .dashAbout {
-    margin: -48px 20px 0px 0px;
+    margin: -48px 20px 0px 16px;
     color: rgb(128, 128, 128);
     font-weight: bold;
 }

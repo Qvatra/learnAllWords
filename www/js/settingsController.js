@@ -101,6 +101,7 @@
     vm.$watch('settings.direction', function (newValue, oldValue) {
         if (!newValue || newValue == oldValue) return;
 
+        $rootScope.settings.direction = newValue;
         ioService.saveSettings();
     });
 
