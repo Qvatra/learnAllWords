@@ -56,25 +56,32 @@
 
     vm.help = function () {
         $ionicPopup.alert({
-            title: 'Learn Words App, 2014',
-            template: 'There is a lot of \'learn words\' apps but this one is unique!<br/>\
-                    The app shows you a word and you should guess its translation.<br />\
-                    A word gets +1 star with correct answer and -1 star otherwise.<br />\
-                    The probability of a word to appear is directly related to a number of stars the word has.<br />\
-                    It means that words that you already know will appear rarely.<br />\
-                    The probabilities are adjustable values and you can set them in settings.<br /><br />\
-                    Another great feature is the "direction of the translation" mode.<br />\
-                    Using T->W or COMBINED modes will help you to expand your active vocabulary while W->T aimed mainly at your passive vocabulary.<br /><br />\
-                    A dictionary could be expanded or modified on the fly while you are learning.<br />\
-                    In addition you can import an external dictionary file or export current dictionary to a file.<br />\
-                    External file should be utf-8 encoded and have the following format:<br />\
-                    word1;translation1<br />\
-                    word2;translation2<br />\
-                    ...<br />\
-                    wordN;translationN'
+            title: 'How it works...',
+            template: '<p><h6>A word gets +1 star with correct quess and -1 star otherwise. \
+                    Word\'s probability to appear(adjustable) is related to a number of stars. \
+                    Thus, the words that you know beter will appear less frequently.</h6></p>\
+                    <p><h6>W->T mode aimed at expanding a passive vocabulary while other 2 modes aimed at your active vocabulary.</h6></p>\
+                    <p><h6>Utf-8 files for import should be formatted as: word<strong>;</strong>translation'
             });
     }
 
     vm.calculateProgresses();
     vm.calculateColors();
 }])
+
+
+//'There is a lot of \'learn words\' apps but this one is unique!<br/>\
+//                    The app shows you a word and you should guess its translation.<br />\
+//                    A word gets +1 star with correct answer and -1 star otherwise.<br />\
+//                    The probability of a word to appear is directly related to a number of stars the word has.<br />\
+//                    It means that words that you already know will appear rarely.<br />\
+//                    The probabilities are adjustable values and you can set them in settings.<br /><br />\
+//                    Another great feature is the "direction of the translation" mode.<br />\
+//                    Using T->W or COMBINED modes will help you to expand your active vocabulary while W->T aimed mainly at your passive vocabulary.<br /><br />\
+//                    A dictionary could be expanded or modified on the fly while you are learning.<br />\
+//                    In addition you can import an external dictionary file or export current dictionary to a file.<br />\
+//                    External file should be utf-8 encoded and have the following format:<br />\
+//                    word1;translation1<br />\
+//                    word2;translation2<br />\
+//                    ...<br />\
+//                    wordN;translationN'
