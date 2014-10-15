@@ -26,7 +26,7 @@
 
 
     vm.calculateFrequency();
-    vm.progress = cardService.calculateProgress(vm.settings.direction);
+    vm.progress = parseInt(cardService.calculateProgress('both'));
 
 
 
@@ -56,7 +56,7 @@
 
     vm.resetProgress = function () {
         cardService.resetProgress();
-        vm.progress = cardService.calculateProgress(vm.settings.direction);
+        vm.progress = parseInt(cardService.calculateProgress('both'));
         ioService.saveDictionary($rootScope.dictionary);
     }
 

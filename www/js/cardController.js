@@ -10,10 +10,12 @@
     vm.currentDirection;
     vm.colorProgress;
     vm.progressBarStyle;
-
-    vm.repeatDelay = 5;
+   
 
     if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) ioService.initialize(); //dictionary, settings
+
+    vm.repeatDelay = Math.floor($rootScope.dictionary.length / 2);
+
 
     vm.detectDirection = function () {
         if ($rootScope.settings.direction == 'direct') {
@@ -122,9 +124,11 @@
         else return null;
     }
 
+
     vm.answer = function () {
         vm.mode = 'answer';
     }
+
 
     vm.correct = function () {
         vm.mode = 'question';
@@ -147,11 +151,13 @@
         }
     }
 
+
     vm.wrong = function () {
         vm.mode = 'question';
         vm.setWeightForCurrent(-1);
         vm.card = vm.nextCard(parseInt($rootScope.settings.w1), parseInt($rootScope.settings.w2), parseInt($rootScope.settings.w3), parseInt($rootScope.settings.w4));
     }
+
 
     vm.setWeightForCurrent = function (dw) {
         var current = $rootScope.dictionary[$rootScope.dictionary.length - 1];

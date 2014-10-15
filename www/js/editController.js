@@ -1,6 +1,6 @@
 ﻿angular.module('controllers')
 
-.controller('EditCtrl', ['$scope', '$rootScope', 'ioService', '$q', '$ionicPopup', '$ionicScrollDelegate', '$state', function ($scope, $rootScope, ioService, $q, $ionicPopup, $ionicScrollDelegate, $state) {
+.controller('EditCtrl', ['$scope', '$rootScope', 'ioService', '$q', '$ionicPopup', '$ionicScrollDelegate', '$state', 'cardService', function ($scope, $rootScope, ioService, $q, $ionicPopup, $ionicScrollDelegate, $state, cardService) {
     //console.log('EditCtrl');
     var vm = $scope;
 
