@@ -10,11 +10,10 @@
     vm.currentDirection;
     vm.colorProgress;
     vm.progressBarStyle;
+    vm.repeatDelay;
    
 
     if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) ioService.initialize(); //dictionary, settings
-
-    vm.repeatDelay = Math.floor($rootScope.dictionary.length / 2);
 
 
     vm.detectDirection = function () {
@@ -57,6 +56,8 @@
 
             return vm.nextCard(w1, w2, w3, w4);
         } else {
+            vm.repeatDelay = Math.floor(cardService.wordsToLearn() / 2);
+
             if ($rootScope.dictionary.length > vm.repeatDelay && (item.idx >= $rootScope.dictionary.length - vm.repeatDelay)) {
                 console.log('rejected due to repeat rule: item name: ' + item.w);
                 if (w == 1) w1 = 0;
@@ -125,9 +126,11 @@
     }
 
 
+
     vm.answer = function () {
         vm.mode = 'answer';
     }
+
 
 
     vm.correct = function () {
@@ -152,11 +155,13 @@
     }
 
 
+
     vm.wrong = function () {
         vm.mode = 'question';
         vm.setWeightForCurrent(-1);
         vm.card = vm.nextCard(parseInt($rootScope.settings.w1), parseInt($rootScope.settings.w2), parseInt($rootScope.settings.w3), parseInt($rootScope.settings.w4));
     }
+
 
 
     vm.setWeightForCurrent = function (dw) {
@@ -173,11 +178,13 @@
     }
 
 
+
     if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) {
         $state.go('tab.dash', {});
     } else {
         vm.card = vm.nextCard(parseInt($rootScope.settings.w1), parseInt($rootScope.settings.w2), parseInt($rootScope.settings.w3), parseInt($rootScope.settings.w4));
         vm.mode = 'question';
     }
+
 
 }])

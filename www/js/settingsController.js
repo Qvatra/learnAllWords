@@ -43,8 +43,8 @@
 
 
     vm.saveWeights = function () {
-        if (vm.f1 < 5 || vm.f2 < 5 || vm.f3 < 5 || vm.f4 < 5) {
-            $ionicPopup.alert({ title: 'Can not Save!', template: 'Frequency values can not be less then 5 %.' });
+        if (vm.f1 < 1 || vm.f2 < 1 || vm.f3 < 1 || vm.f4 < 1) {
+            $ionicPopup.alert({ title: 'Can not Save!', template: 'Frequency values can not be less then 1 %.' });
         } else {
             $rootScope.settings = vm.settings;
             ioService.saveSettings();

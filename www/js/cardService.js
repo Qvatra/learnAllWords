@@ -46,4 +46,20 @@
     }
 
 
+    vm.wordsToLearn = function (dir) { //amount of words with les than 4 stars
+        var count = 0;
+
+        $rootScope.dictionary.forEach(function (item) {
+            if (dir == 'direct') {
+                if (item.d < 4) count++;
+            } else if(dir =='reverse'){
+                if (item.r < 4) count++;
+            }
+        });
+
+        return count;
+    }
+
+
+
 }]);

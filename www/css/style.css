@@ -28,7 +28,7 @@ ion-content {
     color: rgb(0, 0, 0);
     font-size: 25px;
     font-family: cursive;
-    padding-top: 2px;
+    padding-top: 5px;
 }
 
 .dashFooter {
@@ -54,6 +54,8 @@ ion-content {
 }
 
 
+
+
 /* DICTIONARY VIEW */
 .gradient {
     background: linear-gradient(to left, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) !important;
@@ -76,14 +78,13 @@ ion-content {
 }
 
 .itemBtn {
-    margin: 1px -5px 0px 0px;
+    margin: 0px -10px 0px 0px;
 }
 
 .btnBar {
     background-color: rgb(39, 57, 57);
     bottom: 75px !important;
 }
-
 
 .btnTxt {
     font-size: 17px !important;
@@ -101,6 +102,10 @@ ion-content {
 .navBtn {
     background: rgba(169, 169, 169, 0.5) !important;
     font-weight: bold !important;
+}
+
+.editChecker {
+    margin: 0px 4px 0px -1px;
 }
 
 

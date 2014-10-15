@@ -30,7 +30,7 @@
     }
 
     vm.export = function () {
-        $state.go('tab.explorer', {mode: 'export'});
+        $state.go('tab.explorer', { mode: 'export' });
     }
 
 
@@ -51,9 +51,15 @@
 
 
     vm.addItem = function () {
-        vm.array.push({ w: '', t: '', d: 1, r: 1, h: 0 });
-        $ionicScrollDelegate.scrollBottom();
+        //vm.array.push({ w: '', t: '', d: 1, r: 1 });
+        vm.array.splice(0, 0, { w: '', t: '', d: 1, r: 1 });
+        //$ionicScrollDelegate.scrollBottom();
     }
 
+    vm.isDone = function (item) {
+        if (item.r == 4 && item.d == 4) return { color: 'rgb(0, 252, 41)' };
+        if (item.r < 4 && item.d == 4 || item.r == 4 && item.d < 4) return { color: 'darkorange' };
+        if (item.r < 4 && item.d < 4) return { color: 'rgba(128, 128, 128, 0.2)' };
+    }
 
 }])
