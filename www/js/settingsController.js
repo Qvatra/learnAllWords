@@ -31,10 +31,10 @@
 
 
     vm.resetWeights = function () {
-        vm.settings.w1 = 5;
-        vm.settings.w2 = 15;
-        vm.settings.w3 = 30;
-        vm.settings.w4 = 50;
+        vm.settings.w1 = 50;
+        vm.settings.w2 = 30;
+        vm.settings.w3 = 15;
+        vm.settings.w4 = 5;
 
         vm.calculateFrequency();
         $rootScope.settings = vm.settings;

@@ -6,7 +6,7 @@
         if (localStorage.getItem('dictionary') && localStorage.getItem('dictionary') != "undefined") {
             $rootScope.dictionary = JSON.parse(localStorage.getItem('dictionary'));
             $rootScope.dictionary = $rootScope.dictionary.map(function (item) {
-                return { w: item.w, t: item.t, d: parseFloat(item.d), r: parseFloat(item.r) };
+                return { w: item.w, t: item.t, d: parseInt(item.d), r: parseInt(item.r)};
             });
         } else {
             $rootScope.dictionary = [];
@@ -17,7 +17,7 @@
             $rootScope.settings = JSON.parse(localStorage.getItem('settings'));
             $rootScope.settings = vm.parseFloatSettings($rootScope.settings);
         } else {
-            $rootScope.settings = { direction: 'both', w1: 5, w2: 15, w3: 30, w4: 50 };
+            $rootScope.settings = { direction: 'both', w1: 50, w2: 30, w3: 15, w4: 5 };
             vm.saveSettings();
         }
     }

@@ -11,6 +11,8 @@
     vm.colorProgress;
     vm.progressBarStyle;
 
+    vm.repeatDelay = 5;
+
     if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) ioService.initialize(); //dictionary, settings
 
     vm.detectDirection = function () {
@@ -23,65 +25,100 @@
         }
     }
 
-    vm.nextCard = function () {
-        var r = Math.random() * ($rootScope.settings.w1 + $rootScope.settings.w2 + $rootScope.settings.w3 + $rootScope.settings.w4);
+
+
+    vm.nextCard = function (w1, w2, w3, w4) { //50, 30, 15, 5
+        console.log('nextCard: ' + w1 + ' ' + w2 + ' ' + w3 + ' ' + w4);
+        //console.log('nextCardWieghts: ' + w1 + ' ' + (w1 + w2) + ' ' + (w1 + w2 + w3) + ' ' + (w1 + w2 + w3 + w4));
+        var r = Math.random() * (w1 + w2 + w3 + w4);
         var w;
 
-        if (r <= $rootScope.settings.w1) w = 4;
-        else if (r <= $rootScope.settings.w1 + $rootScope.settings.w2) w = 3;
-        else if (r <= $rootScope.settings.w1 + $rootScope.settings.w2 + $rootScope.settings.w3) w = 2;
-        else w = 1;
+        console.log('r= ' + r + ' out of ' + (w1 + w2 + w3 + w4));
 
-        //console.log('r=' + r + ' w=' + w);
+        if (r <= w1) w = 1;
+        else if (r <= w1 + w2) w = 2;
+        else if (r <= w1 + w2 + w3) w = 3;
+        else w = 4;
 
-        vm.detectDirection();
+        vm.detectDirection(); //sets vm.currentDirection
+
+        if (w1 + w2 + w3 + w4 == 0) w = 0;
 
         var item = (vm.currentDirection == 'direct') ? vm.getDirect(w) : vm.getReverse(w);
 
         if (!item) {
-            return vm.nextCard();
-        } else {
-            vm.progress = cardService.calculateProgress($rootScope.settings.direction);
-            vm.colorProgress = { color: cardService.calculateColor($rootScope.settings.direction), fontFamily: 'cursive' };
-            vm.progressBarStyle = { background: cardService.calculateColor($rootScope.settings.direction), width: vm.progress + '%' };
+            console.log('no item for star: ' + w);
+            if (w == 1) w1 = 0;
+            if (w == 2) w2 = 0;
+            if (w == 3) w3 = 0;
+            if (w == 4) w4 = 0;
 
-            //console.log('printing array --------------------------------');
-            //console.log('random = ' + r + '%, weight = ' + w + ', dir: ' + item.dir);
-            //$rootScope.dictionary.forEach(function (item) {
-            //    console.log('w: ' + item.w + ', t: ' + item.t + ', d: ' + item.d + ', r: ' + item.r);
-            //});
-            return item;
+            return vm.nextCard(w1, w2, w3, w4);
+        } else {
+            if ($rootScope.dictionary.length > vm.repeatDelay && (item.idx >= $rootScope.dictionary.length - vm.repeatDelay)) {
+                console.log('rejected due to repeat rule: item name: ' + item.w);
+                if (w == 1) w1 = 0;
+                if (w == 2) w2 = 0;
+                if (w == 3) w3 = 0;
+                if (w == 4) w4 = 0;
+
+                return vm.nextCard(w1, w2, w3, w4);
+            } else {
+                console.log('item with star: ' + w + ' selected');
+                vm.progress = cardService.calculateProgress($rootScope.settings.direction);
+                vm.colorProgress = { color: cardService.calculateColor($rootScope.settings.direction), fontFamily: 'cursive' };
+                vm.progressBarStyle = { background: cardService.calculateColor($rootScope.settings.direction), width: vm.progress + '%' };
+
+                return item;
+            }
         }
     }
+
 
 
     vm.getDirect = function (w) {
         var result = null;
+        var idx = 0;
 
-        for (var i = 0; i < $rootScope.dictionary.length; i++) {
-            if ($rootScope.dictionary[i].d == w) {
-                result = $rootScope.dictionary.splice(i, 1)[0];
-                $rootScope.dictionary.push(result);
-                break;
+        if (w == 0) {
+            result = $rootScope.dictionary.splice(0, 1)[0];
+            $rootScope.dictionary.push(result);
+        } else {
+            for (var i = 0; i < $rootScope.dictionary.length; i++) {
+                if ($rootScope.dictionary[i].d == w) {
+                    result = $rootScope.dictionary.splice(i, 1)[0];
+                    $rootScope.dictionary.push(result);
+                    idx = i;
+                    break;
+                }
             }
         }
 
-        if (result) return { w: result.w, t: result.t, weight: result.d, dir: 'd' };
+        if (result) return { w: result.w, t: result.t, weight: result.d, dir: 'd', idx: idx };
         else return null;
     }
 
 
+
     vm.getReverse = function (w) {
         var result = null;
+        var idx = 0;
 
-        for (var i = 0; i < $rootScope.dictionary.length; i++) {
-            if ($rootScope.dictionary[i].r == w) {
-                result = $rootScope.dictionary.splice(i, 1)[0];
-                $rootScope.dictionary.push(result);
-                break;
+        if (w == 0) {
+            result = $rootScope.dictionary.splice(0, 1)[0];
+            $rootScope.dictionary.push(result);
+        } else {
+            for (var i = 0; i < $rootScope.dictionary.length; i++) {
+                if ($rootScope.dictionary[i].r == w) {
+                    result = $rootScope.dictionary.splice(i, 1)[0];
+                    $rootScope.dictionary.push(result);
+                    idx = i;
+                    break;
+                }
             }
         }
-        if (result) return { w: result.t, t: result.w, weight: result.r, dir: 'r' };
+
+        if (result) return { w: result.t, t: result.w, weight: result.r, dir: 'r', idx: idx };
         else return null;
     }
 
@@ -93,7 +130,7 @@
         vm.mode = 'question';
         vm.setWeightForCurrent(1);
 
-        vm.card = vm.nextCard();
+        vm.card = vm.nextCard(parseInt($rootScope.settings.w1), parseInt($rootScope.settings.w2), parseInt($rootScope.settings.w3), parseInt($rootScope.settings.w4));
 
         if (vm.progress == 100) {
             if ($rootScope.settings.direction == 'both') {
@@ -113,7 +150,7 @@
     vm.wrong = function () {
         vm.mode = 'question';
         vm.setWeightForCurrent(-1);
-        vm.card = vm.nextCard();
+        vm.card = vm.nextCard(parseInt($rootScope.settings.w1), parseInt($rootScope.settings.w2), parseInt($rootScope.settings.w3), parseInt($rootScope.settings.w4));
     }
 
     vm.setWeightForCurrent = function (dw) {
@@ -133,7 +170,7 @@
     if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) {
         $state.go('tab.dash', {});
     } else {
-        vm.card = vm.nextCard();
+        vm.card = vm.nextCard(parseInt($rootScope.settings.w1), parseInt($rootScope.settings.w2), parseInt($rootScope.settings.w3), parseInt($rootScope.settings.w4));
         vm.mode = 'question';
     }
 

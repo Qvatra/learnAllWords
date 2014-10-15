@@ -51,7 +51,7 @@
 
 
     vm.addItem = function () {
-        vm.array.push({ w: '', t: '', d: 1, r: 1 });
+        vm.array.push({ w: '', t: '', d: 1, r: 1, h: 0 });
         $ionicScrollDelegate.scrollBottom();
     }
 

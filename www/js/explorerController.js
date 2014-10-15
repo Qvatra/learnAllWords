@@ -2,7 +2,7 @@
 
 angular.module('controllers')
 
-.controller('ExplorerCtrl', ['$scope', '$rootScope', '$cordovaFile', '$q', '$state', 'explorerService', 'ioService', '$ionicPopup', function ($scope, $rootScope, $cordovaFile, $q, $state, explorerService, ioService, $ionicPopup) {
+.controller('ExplorerCtrl', ['$scope', '$rootScope', '$cordovaFile', '$timeout', '$q', '$state', 'explorerService', '$ionicScrollDelegate', 'ioService', '$ionicPopup', function ($scope, $rootScope, $cordovaFile, $timeout, $q, $state, explorerService, $ionicScrollDelegate, ioService, $ionicPopup) {
     //console.log('ExplorerCtrl');
     var vm = $scope;
 
@@ -17,6 +17,7 @@ angular.module('controllers')
     explorerService.getList(vm.currentUrl.substr(3)).then(function (list) {
         //console.log(list);
         vm.array = list;
+        $ionicScrollDelegate.scrollTop();
     });
 
 
@@ -28,13 +29,18 @@ angular.module('controllers')
             vm.array = list;
             vm.currentUrl = '..' + url;
             vm.fileName = '';
+            $ionicScrollDelegate.scrollTop();
         });
     }
+
+
 
     vm.fileClick = function (name) {
         //console.log(name);
         vm.fileName = name;
     }
+
+
 
     vm.goBack = function () {
         var url = vm.currentUrl.substr(3, vm.currentUrl.lastIndexOf('/') - 3);
@@ -43,6 +49,7 @@ angular.module('controllers')
             vm.array = list;
             vm.currentUrl = '../' + url;
             vm.fileName = '';
+            $ionicScrollDelegate.scrollTop();
         });
     }
 
@@ -86,7 +93,7 @@ angular.module('controllers')
                                 var pairs = data.split('\n');
                                 if (pairs[pairs.length - 1] == '') pairs.pop();
                                 var array = pairs.map(function (item) {
-                                    return { w: item.split(';')[0].trim(), t: item.split(';')[1].trim(), d: 1, r: 1 };
+                                    return { w: item.split(';')[0].trim(), t: item.split(';')[1].trim(), d: 1, r: 1, h: 0 };
                                 });
                                 ioService.saveDictionary(array);
                                 $rootScope.dictionary = array;
