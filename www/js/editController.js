@@ -1,6 +1,28 @@
 ﻿angular.module('controllers')
 
-.controller('EditCtrl', ['$scope', '$rootScope', 'ioService', '$q', '$ionicPopup', '$ionicScrollDelegate', '$state', 'cardService', function ($scope, $rootScope, ioService, $q, $ionicPopup, $ionicScrollDelegate, $state, cardService) {
+.controller('EditCtrl', [
+    '$scope',
+    '$rootScope',
+    'ioService',
+    '$q',
+    '$ionicPopup',
+    '$ionicScrollDelegate',
+    '$state',
+    'cardService',
+    'domCleaner',
+    '$cordovaFile',
+    function (
+        $scope,
+        $rootScope,
+        ioService,
+        $q,
+        $ionicPopup,
+        $ionicScrollDelegate,
+        $state,
+        cardService,
+        domCleaner,
+        $cordovaFile
+    ) {
     //console.log('EditCtrl');
     var vm = $scope;
 
@@ -10,6 +32,7 @@
 
     $scope.$on("$destroy", function () {
         //console.log('edit destroy');
+        domCleaner.removeAllChildren(document.getElementById('dictionary'));
     });
 
 
@@ -61,5 +84,6 @@
         if (item.r < 4 && item.d == 4 || item.r == 4 && item.d < 4) return { color: 'darkorange' };
         if (item.r < 4 && item.d < 4) return { color: 'rgba(128, 128, 128, 0.2)' };
     }
+
 
 }])

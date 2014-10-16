@@ -1,63 +1,65 @@
-<ion-view title="Cards">
-    <ion-content class="padding">
+<div id="cardsView">
+    <ion-view title="Cards">
+        <ion-content class="padding">
 
-        <div class="row">
-            <div class="col" style="height: 59px;">
-                <div class="centerTxt">
-                    <h2 ng-style="colorProgress">Progress: {{progress}} %</h2>
+            <div class="row">
+                <div class="col" style="height: 59px;">
+                    <div class="centerTxt">
+                        <h2 ng-style="colorProgress">Progress: {{progress}} %</h2>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col" style="padding: 0px 0px 5px 0px;">
-                <div class="progressBar" ng-style="progressBarStyle"></div>
+            <div class="row">
+                <div class="col" style="padding: 0px 0px 5px 0px;">
+                    <div class="progressBar" ng-style="progressBarStyle"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col green" >
-                <div class="card">
-                    <div class="item cardHeight">
-                        <div class="floatL" style="font-size:22px;">{{card.w}}</div>
-                        <div class="floatR">
-                            <div ng-show="card.weight == 1">
-                                <i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
-                            </div>
-                            <div ng-show="card.weight == 2">
-                                <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
-                            </div>
-                            <div ng-show="card.weight == 3">
-                                <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i>
-                            </div>
-                            <div ng-show="card.weight == 4">
-                                <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>
+            <div class="row">
+                <div class="col green">
+                    <div class="card">
+                        <div class="item cardHeight">
+                            <div class="floatL" style="font-size:22px;">{{card.w}}</div>
+                            <div class="floatR">
+                                <div ng-show="card.weight == 1">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="card.weight == 2">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="card.weight == 3">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star-outline"></i>
+                                </div>
+                                <div ng-show="card.weight == 4">
+                                    <i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i><i class="ion-ios7-star"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div ng-show="mode == 'answer'">
-            <div class="row">
-                <div class="col blue">
-                    <div class="card">
-                        <div class="item item-text-wrap cardHeight" style="font-size:22px;">{{card.t}}</div>
+            <div ng-show="mode == 'answer'">
+                <div class="row">
+                    <div class="col blue">
+                        <div class="card">
+                            <div class="item item-text-wrap cardHeight" style="font-size:22px;">{{card.t}}</div>
+                        </div>
                     </div>
-                </div>
-            </div><br />
-        </div>
-        <div style="color:rgba(0,0,0,0);">{{mode}}</div>
-    </ion-content>
-</ion-view>
+                </div><br />
+            </div>
+            <div style="color:rgba(0,0,0,0);">{{mode}}</div>
+        </ion-content>
+    </ion-view>
 
-<ion-footer-bar align-title="left" class="noPadding btnBar">
-    <div ng-if="mode == 'answer'" class="button-bar">
-        <a class="button button-assertive btnTxt cursive" ng-click="wrong()"><h3 class="cardBtnTxt">Wrong</h3></a>
-        <a class="button button-balanced btnTxt cursive" ng-click="correct()"><h3 class="cardBtnTxt">Correct</h3></a>
-    </div>
-    <div ng-if="mode == 'question'" class="button-bar">
-        <a class="button button-balanced btnTxt cursive" ng-click="answer()"><h3 class="cardBtnTxt">Translate</h3></a>
-    </div>
-</ion-footer-bar>
+    <ion-footer-bar align-title="left" class="noPadding btnBar">
+        <div ng-if="mode == 'answer'" class="button-bar">
+            <a class="button button-assertive btnTxt cursive" ng-click="wrong()"><h3 class="cardBtnTxt">Wrong</h3></a>
+            <a class="button button-balanced btnTxt cursive" ng-click="correct()"><h3 class="cardBtnTxt">Correct</h3></a>
+        </div>
+        <div ng-if="mode == 'question'" class="button-bar">
+            <a class="button button-balanced btnTxt cursive" ng-click="answer()"><h3 class="cardBtnTxt">Translate</h3></a>
+        </div>
+    </ion-footer-bar>
+</div>

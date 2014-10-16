@@ -1,6 +1,6 @@
 ﻿angular.module('controllers')
 
-.controller('SettingsCtrl', ['$scope', '$rootScope', '$state', 'ioService', 'cardService', '$ionicPopup', function ($scope, $rootScope, $state, ioService, cardService, $ionicPopup) {
+.controller('SettingsCtrl', ['$scope', '$rootScope', '$state', 'ioService', 'cardService', '$ionicPopup', 'domCleaner', function ($scope, $rootScope, $state, ioService, cardService, $ionicPopup, domCleaner) {
     //console.log('settingsController');
     var vm = $scope;
 
@@ -28,6 +28,11 @@
     vm.calculateFrequency();
     vm.progress = parseInt(cardService.calculateProgress('both'));
 
+
+    $scope.$on("$destroy", function () {
+        //console.log('settings destroy');
+        domCleaner.removeAllChildren(document.getElementById('settings'));
+    });
 
 
     vm.resetWeights = function () {

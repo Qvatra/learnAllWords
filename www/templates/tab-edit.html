@@ -1,48 +1,50 @@
-<ion-nav-buttons side="left">
-    <button class="button navBtn" style="margin-left: 1px;" ng-click="export()">Export</button>
-</ion-nav-buttons>
-<ion-nav-buttons side="right">
-    <button class="button navBtn" style="margin-right: 1px;" ng-click="import()">Import</button>
-</ion-nav-buttons>
+<div id="dictionary">
+    <ion-nav-buttons side="left">
+        <button class="button navBtn" style="margin-left: 1px;" ng-click="export()">Save</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button navBtn" style="margin-right: 1px;" ng-click="import()">Load</button>
+    </ion-nav-buttons>
 
-<ion-view title="Dictionary">
-    <ion-content>
+    <ion-view title="Dictionary">
+        <ion-content>
 
-        <div class="item item-button-right editItem gradient">
-            <div class="inputTxt" style="text-align: center;">Add new item</div>
-            <button class="button button-stable ion-plus-round itemBtn" ng-click="addItem()"></button>
-        </div>
+            <div class="item item-button-right editItem gradient">
+                <div class="inputTxt" style="text-align: center;">Add new item</div>
+                <button class="button button-stable ion-plus-round itemBtn" ng-click="addItem()"></button>
+            </div>
 
-        <div class="editList" ng-repeat="item in array track by $index">
-            <div class="item-button-right editItem">
-                <div class="item-input-inset" style="padding: 10px 0px 10px 5px;">
+            <div class="editList" ng-repeat="item in array track by $index">
+                <div class="item-button-right editItem">
+                    <div class="item-input-inset" style="padding: 10px 0px 10px 5px;">
 
-                    <div class="icon ion-checkmark-round editChecker" ng-style="isDone(item)"></div>
+                        <div class="icon ion-checkmark-round editChecker" ng-style="isDone(item)"></div>
 
-                    <label class="item-input-wrapper">
-                        <input type="text" ng-model="item.w" placeholder="Word" class="inputTxt">
-                    </label>
-                    <div style="width: 8px;"></div>
-                    <label class="item-input-wrapper">
-                        <input type="text" ng-model="item.t" placeholder="Translation" class="inputTxt">
-                    </label>
+                        <label class="item-input-wrapper">
+                            <input type="text" ng-model="item.w" placeholder="Word" class="inputTxt">
+                        </label>
+                        <div style="width: 8px;"></div>
+                        <label class="item-input-wrapper">
+                            <input type="text" ng-model="item.t" placeholder="Translation" class="inputTxt">
+                        </label>
+                    </div>
+                    <button class="button button-assertive ion-minus-round itemBtn" ng-click="deleteItem($index)"></button>
                 </div>
-                <button class="button button-assertive ion-minus-round itemBtn" ng-click="deleteItem($index)"></button>
+            </div>
+
+        </ion-content>
+    </ion-view>
+
+    <ion-footer-bar align-title="left" class="noPadding expFooter">
+        <div class="row" style="padding: 0px 0px 0px 5px;">
+            <div class="col col-50">
+                <a class="button button-balanced floatL halfW" ng-click="save()"><h4 class="expBtnTxt">Save</h4></a>
+                <a class="button button-positive floatR halfW" ng-click="cancel()"><h4 class="expBtnTxt">Cancel</h4></a>
+            </div>
+            <div class="col col-50">
+                <a class="button button-stable floatL halfW" ng-click="addItem()"><h4 class="expBtnTxt">Add</h4></a>
+                <a class="button button-assertive floatR halfW" ng-click="deleteAll()"><h4 class="expBtnTxt">Delete</h4></a>
             </div>
         </div>
-
-    </ion-content>
-</ion-view>
-
-<ion-footer-bar align-title="left" class="noPadding expFooter">
-    <div class="row" style="padding: 0px 0px 0px 5px;">
-        <div class="col col-50">
-            <a class="button button-balanced floatL halfW" ng-click="save()"><h4 class="expBtnTxt">Save</h4></a>
-            <a class="button button-positive floatR halfW" ng-click="cancel()"><h4 class="expBtnTxt">Cancel</h4></a>
-        </div>
-        <div class="col col-50">
-            <a class="button button-stable floatL halfW" ng-click="addItem()"><h4 class="expBtnTxt">Add</h4></a>
-            <a class="button button-assertive floatR halfW" ng-click="deleteAll()"><h4 class="expBtnTxt">Delete</h4></a>
-        </div>
-    </div>
-</ion-footer-bar>
+    </ion-footer-bar>
+</div>

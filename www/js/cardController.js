@@ -1,6 +1,6 @@
 ﻿angular.module('controllers')
 
-.controller('CardCtrl', ['$scope', '$rootScope', 'ioService', 'cardService', '$ionicPopup', '$state', function ($scope, $rootScope, ioService, cardService, $ionicPopup, $state) {
+.controller('CardCtrl', ['$scope', '$rootScope', 'ioService', 'cardService', '$ionicPopup', '$state', 'domCleaner', function ($scope, $rootScope, ioService, cardService, $ionicPopup, $state, domCleaner) {
     //console.log('CardCtrl');
     var vm = $scope;
 
@@ -14,6 +14,12 @@
    
 
     if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) ioService.initialize(); //dictionary, settings
+
+
+    $scope.$on("$destroy", function () {
+        //console.log('cards destroy');
+        domCleaner.removeAllChildren(document.getElementById('cardsView'));
+    });
 
 
     vm.detectDirection = function () {
@@ -56,7 +62,7 @@
 
             return vm.nextCard(w1, w2, w3, w4);
         } else {
-            vm.repeatDelay = Math.floor(cardService.wordsToLearn() / 2);
+            vm.repeatDelay = Math.floor(cardService.wordsToLearn(vm.currentDirection) / 2);
 
             if ($rootScope.dictionary.length > vm.repeatDelay && (item.idx >= $rootScope.dictionary.length - vm.repeatDelay)) {
                 console.log('rejected due to repeat rule: item name: ' + item.w);

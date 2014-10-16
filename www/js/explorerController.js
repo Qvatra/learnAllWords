@@ -2,7 +2,7 @@
 
 angular.module('controllers')
 
-.controller('ExplorerCtrl', ['$scope', '$rootScope', '$cordovaFile', '$timeout', '$q', '$state', 'explorerService', '$ionicScrollDelegate', 'ioService', '$ionicPopup', function ($scope, $rootScope, $cordovaFile, $timeout, $q, $state, explorerService, $ionicScrollDelegate, ioService, $ionicPopup) {
+.controller('ExplorerCtrl', ['$scope', '$rootScope', '$cordovaFile', '$timeout', '$q', '$state', 'explorerService', '$ionicScrollDelegate', 'ioService', '$ionicPopup', 'domCleaner', function ($scope, $rootScope, $cordovaFile, $timeout, $q, $state, explorerService, $ionicScrollDelegate, ioService, $ionicPopup, domCleaner) {
     //console.log('ExplorerCtrl');
     var vm = $scope;
 
@@ -20,6 +20,11 @@ angular.module('controllers')
         $ionicScrollDelegate.scrollTop();
     });
 
+
+    $scope.$on("$destroy", function () {
+        //console.log('explorer destroy');
+        domCleaner.removeAllChildren(document.getElementById('explorerView'));
+    });
 
 
     vm.folderClick = function (url) {
@@ -81,9 +86,10 @@ angular.module('controllers')
     }
 
 
+
     vm.load = function () {
         if (vm.fileName || vm.fileName.trim() != '') {
-            $ionicPopup.confirm({ title: 'Are you sure?', template: 'You are about to download ' + vm.fileName + ' dictionary. Current dictionary data will be lost.', cancelType: 'button-positive', okType: 'button-balanced' })
+            $ionicPopup.confirm({ title: 'Are you sure?', template: 'You are about to import ' + vm.fileName + ' dictionary. Current dictionary data will be lost.', cancelType: 'button-positive', okType: 'button-balanced' })
                 .then(function (ok) {
                     if (ok) {
                         var url = (vm.currentUrl.substr(3) == '') ? '' : vm.currentUrl.substr(3) + '/';
@@ -100,10 +106,10 @@ angular.module('controllers')
 
                                 $state.go('tab.edit', {});
                             } catch (err) {
-                                $ionicPopup.alert({ title: 'Import', template: 'Wrong file format.' });
+                                $ionicPopup.alert({ title: 'Import', template: 'Wrong file format.<br />An import file should have format: word;translation...<br />If you are trying to open your progress file use <strong>Open</strong> button.' });
                             }
                         }, function () {
-                            $ionicPopup.alert({ title: 'Import', template: 'Wrong file name.' });
+                            $ionicPopup.alert({ title: 'Import', template: 'Wrong file name.<br />An import file should have format: word;translation...<br />If you are trying to open your progress file use <strong>Open</strong> button.' });
                         });
                     }
                 });
@@ -113,10 +119,60 @@ angular.module('controllers')
     }
 
 
+
     vm.cancel = function () {
         //console.log('cancel');
         $state.go('tab.edit', {});
     }
+
+
+
+    vm.saveWithProgress = function () {
+        //console.log('saveWithProgress');
+
+        if (vm.fileName || vm.fileName.trim() != '') {
+            var dic2save = JSON.stringify($rootScope.dictionary);
+
+            var url = (vm.currentUrl.substr(3) == '') ? '' : vm.currentUrl.substr(3) + '/';
+
+            $cordovaFile.writeFile(url + vm.fileName, dic2save).then(function () {
+                $state.go('tab.edit', {});
+            }, function () {
+                $ionicPopup.alert({ title: 'Save', template: 'File not saved' });
+            });
+        } else {
+            $ionicPopup.alert({ title: 'Save', template: 'Please enter a file name.' });
+        }
+    }
+
+
+    vm.loadWithProgress = function () {
+        if (vm.fileName || vm.fileName.trim() != '') {
+            $ionicPopup.confirm({ title: 'Are you sure?', template: 'You are about to load ' + vm.fileName + ' dictionary. Current dictionary data will be lost.', cancelType: 'button-positive', okType: 'button-balanced' })
+                .then(function (ok) {
+                    if (ok) {
+                        var url = (vm.currentUrl.substr(3) == '') ? '' : vm.currentUrl.substr(3) + '/';
+
+                        $cordovaFile.readAsText(url + vm.fileName).then(function (data) {
+                            try {
+                                var array = JSON.parse(data);
+                                ioService.saveDictionary(array);
+                                $rootScope.dictionary = array;
+
+                                $state.go('tab.edit', {});
+                            } catch (err) {
+                                $ionicPopup.alert({ title: 'Load', template: 'Wrong file format.<br />If you are trying to import an external dictionary use <strong>Import</strong> button.' });
+                            }
+                        }, function () {
+                            $ionicPopup.alert({ title: 'Load', template: 'Wrong file name.<br />If you are trying to import an external dictionary use <strong>Import</strong> button.' });
+                        });
+                    }
+                });
+        } else {
+            $ionicPopup.alert({ title: 'Load', template: 'No file selected.' });
+        }
+    }
+
 
 
 }])

@@ -1,6 +1,6 @@
 ﻿angular.module('controllers')
 
-.controller('DashCtrl', ['$scope', '$rootScope', 'ioService', 'cardService', '$ionicPopup', '$state', function ($scope, $rootScope, ioService, cardService, $ionicPopup, $state) {
+.controller('DashCtrl', ['$scope', '$rootScope', 'ioService', 'cardService', '$ionicPopup', '$state', 'domCleaner', function ($scope, $rootScope, ioService, cardService, $ionicPopup, $state, domCleaner) {
     //console.log('DashCtrl');
     var vm = $scope;
 
@@ -8,6 +8,13 @@
     $rootScope.almostWinFlag = false; //for card graduation msg
 
     if (!$rootScope.dictionary) ioService.initialize(); //dictionary, settings
+
+
+    $scope.$on("$destroy", function () {
+        //console.log('dash destroy');
+        domCleaner.removeAllChildren(document.getElementById('dashView'));
+    });
+
 
     vm.start = function () {
         if (!$rootScope.dictionary || $rootScope.dictionary.length == 0) {

@@ -1,35 +1,35 @@
-<ion-view title="Dashboard">
-  <ion-content class="padding" style="bottom: 50px;">
-      
-      <div class="row">
-          <div class="col">
-              <div class="centerTxt">
-                  <h2 class="cursive lightGrayTxt">Current progress:</h2><br />
-                  <h3 style="font-size: 20px;" ng-style="colorDir" ng-click="direct()">Word &#151;&#155; Translation: {{progressDir}} %</h3>
-                  <h3 style="font-size: 20px;" ng-style="colorRev" ng-click="reverse()">Translation &#151;&#155; Word: {{progressRev}} %</h3>
-                  <h3 style="font-size: 20px;" ng-style="colorBoth" ng-click="both()">W &#151;&#155; T or T &#151;&#155; W : {{progressBoth}} %</h3><br />
-              </div>
-          </div>
-      </div>
+<div id="dashView">
+    <ion-view title="Dashboard">
+        <ion-content class="padding" style="bottom: 50px;">
 
-      <div class="row">
-          <div class="col">
-              <h5 class="centerTxt">
-                  Learning words was never easier...
-              </h5>
-          </div>
-      </div>
+            <div class="row">
+                <div class="col">
+                    <div class="centerTxt">
+                        <h2 class="cursive lightGrayTxt">Current progress:</h2><br />
+                        <h3 style="font-size: 20px;" ng-style="colorDir" ng-click="direct()">Word &#151;&#155; Translation: {{progressDir}} %</h3>
+                        <h3 style="font-size: 20px;" ng-style="colorRev" ng-click="reverse()">Translation &#151;&#155; Word: {{progressRev}} %</h3>
+                        <h3 style="font-size: 20px;" ng-style="colorBoth" ng-click="both()">W &#151;&#155; T or T &#151;&#155; W : {{progressBoth}} %</h3><br />
+                    </div>
+                </div>
+            </div>
 
-      <div class="row">
-          <div class="col col-50 col-offset-25">
-              <button class="button button-balanced button-large button-full cursive" ng-click="start()"><h2 class="dashBtnTxt">Start</h2></button>
-          </div>
-      </div>
+            <div class="row">
+                <div class="col">
+                    <h5 class="centerTxt">
+                        Learning words was never easier...
+                    </h5>
+                </div>
+            </div>
 
-  </ion-content>
-</ion-view>
-
-<ion-footer-bar class="dashFooter">
-    <a class="floatL" ng-click="help()"><h4 class="dashAbout">Help</h4></a>
-    <a class="floatR" ng-click="about()"><h4 class="dashAbout">About</h4></a>
-</ion-footer-bar>
+            <div class="row">
+                <div class="col col-50 col-offset-25">
+                    <button class="button button-balanced button-large button-full cursive" ng-click="start()"><h2 class="dashBtnTxt">Start</h2></button>
+                </div>
+            </div>
+        </ion-content>
+    </ion-view>
+    <ion-footer-bar class="dashFooter">
+        <a class="floatL" ng-click="help()"><h4 class="dashAbout">Help</h4></a>
+        <a class="floatR" ng-click="about()"><h4 class="dashAbout">About</h4></a>
+    </ion-footer-bar>
+</div>
